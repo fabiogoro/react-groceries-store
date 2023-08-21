@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        crossorigin="anonymous"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        rel="stylesheet">
+  <title>
+  </title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark"
+       data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+           href="home.html">Navbar</a> <button class="navbar-toggler"
+           aria-controls="navbarSupportedContent"
+           aria-expanded="false"
+           aria-label="Toggle navigation"
+           data-bs-target="#navbarSupportedContent"
+           data-bs-toggle="collapse"
+           type="button"><span class="navbar-toggler-icon"></span></button>
+      <div id="navbarSupportedContent"
+           class="collapse navbar-collapse">
+        <form class="d-flex w-100 justify-content-center"
+              role="search">
+          <input class="form-control me-2 w-25"
+                aria-label="Search"
+                placeholder="Search"
+                type="search"> <button class="btn btn-outline-secondary"
+                type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex w-auto justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">Contact</a>
+          </li>
+
+          <li class="nav-item text-nowrap">
+            <a class="nav-link"
+                href="cart.html">Cart <span class="badge rounded-pill text-bg-secondary">3</span></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+                href="#"
+                aria-expanded="false"
+                data-bs-toggle="dropdown"
+                role="button">Hello, user</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item"
+                    href="#">View orders</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="profile.html">My profile</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">My shopping list</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">Log off</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid mt-4 ps-5">
+    <div class="row d-lg-none mb-4">
+      <div class="col col-sm-12">
+        <button class="btn-dark btn w-100"
+             aria-controls="sidebar"
+             aria-expanded="false"
+             aria-label="Toggle sidebar"
+             data-bs-target="#sidebar"
+             data-bs-toggle="offcanvas"
+             type="button">Filters</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-2 d-none d-lg-block">
+        <div class="list-group">
+          <a class="list-group-item-dark list-group-item active fw-bold">Categories</a> <a class="list-group-item 
+           list-group-item-action"
+               href="#">Breakfast</a><a class="list-group-item list-group-item-action"
+               href="#">Dairy</a><a class="list-group-item list-group-item-action"
+               href="#">Fruit</a><a class="list-group-item list-group-item-action"
+               href="#">Vegetable</a>
+        </div>
+
+        <div class="list-group mt-4">
+          <a class="list-group-item-dark list-group-item active fw-bold">Tags</a> <a class="list-group-item 
+           list-group-item-action"
+               href="#">Banana</a><a class="list-group-item list-group-item-action"
+               href="#">Cheese</a><a class="list-group-item list-group-item-action"
+               href="#">Coffee</a><a class="list-group-item list-group-item-action"
+               href="#">Cucumber</a>
+        </div>
+      </div>
+
+      <div class="col col-lg-10">
+        <div class="row">
+          <div class="col col-lg-3 col-md-6 col-12 mt-3">
+            <div class="card">
+              <img class="card-img-top img-fluid"
+                   src= 
+                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.5bLEGgrUJw9PXpPA3ReYBwHaGU%26pid%3DApi&f=1&ipt=1d201f95f3933d931915b17bc31fd9719578b47770ed9ec98c8a80c38c26a157&ipo=images"
+                   alt="..."
+                   style="max-height: 120px;">
+              <div class="card-body text-center">
+                <h5 class="card-title">Apple</h5>
+
+                <h5 class="card-title">$10.00</h5>
+
+                <p class="card-text"><a href="#">More info...</a>
+                </p>
+                <a class="btn btn-dark"
+                     href="#">Add to cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-lg-3 col-md-6 col-12 mt-3">
+            <div class="card">
+              <img class="card-img-top img-fluid"
+                   src= 
+                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KWVhl0nuomQtvJd1Js719wHaE6%26pid%3DApi&f=1&ipt=320abf549b8d5c8fe12cb6846fd2abaa41f0dae209e44fec8938baf0ad22e57d&ipo=images"
+                   alt="..."
+                   style="max-height: 120px;">
+              <div class="card-body text-center">
+                <h5 class="card-title">Banana</h5>
+
+                <h5 class="card-title">$10.00</h5>
+
+                <p class="card-text"><a href="#">More info...</a>
+                </p>
+                <a class="btn btn-dark"
+                     href="#">Add to cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-lg-3 col-md-6 col-12 mt-3">
+            <div class="card">
+              <img class="card-img-top img-fluid"
+                   src= 
+                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.tic7smRD5pkXI7JlLcQKAwHaFo%26pid%3DApi&f=1&ipt=1da3665974faa6caa2353bd57451baff5164a68f05d384cb85948e3055f759dd&ipo=images"
+                   alt="..."
+                   style="max-height: 120px;">
+              <div class="card-body text-center">
+                <h5 class="card-title">Coffee</h5>
+
+                <h5 class="card-title">$10.00</h5>
+
+                <p class="card-text"><a href="#">More info...</a>
+                </p>
+                <a class="btn btn-dark"
+                     href="#">Add to cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-lg-3 col-md-6 col-12 mt-3">
+            <div class="card">
+              <img class="card-img-top img-fluid"
+                   src= 
+                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.lW_N-SkL5oEpxBG2k-7OHwHaE8%26pid%3DApi&f=1&ipt=c2c8730993fab7616b5323c507da261cb9dd3d5abaf4ad3337a4b41b05161703&ipo=images"
+                   alt="..."
+                   style="max-height: 120px;">
+              <div class="card-body text-center">
+                <h5 class="card-title">Cucumber</h5>
+
+                <h5 class="card-title">$10.00</h5>
+
+                <p class="card-text"><a href="#">More info...</a>
+                </p>
+                <a class="btn btn-dark"
+                     href="#">Add to cart</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col col-lg-3 col-md-6 col-12 mt-3">
+            <div class="card">
+              <img class="card-img-top img-fluid"
+                   src= 
+                   "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.ZDT_8ZFWsBzWKpPBld0pHQHaHa%26pid%3DApi&f=1&ipt=e8077b1799162bf55442a4f61961e680da462e0393a8610c7e5fe5f3fd573b30&ipo=images"
+                   alt="..."
+                   style="max-height: 120px;">
+              <div class="card-body text-center">
+                <h5 class="card-title">Milk</h5>
+
+                <h5 class="card-title">$10.00</h5>
+
+                <p class="card-text"><a href="#">More info...</a>
+                </p>
+                <a class="btn btn-dark"
+                     href="#">Add to cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="sidebar"
+       class="offcanvas offcanvas-start"
+       aria-labelledby="sidebarLabel"
+       tabindex="-1">
+    <div class="offcanvas-header">
+      <h5 id="sidebarLabel"
+          class="offcanvas-title">Filters</h5>
+      <button class="btn-close"
+           aria-label="Close"
+           data-bs-dismiss="offcanvas"
+           type="button"></button>
+    </div>
+
+    <div class="offcanvas-body">
+      <div class="list-group">
+        <a class="list-group-item-dark list-group-item active fw-bold">Categories</a> <a class="list-group-item 
+         list-group-item-action"
+             href="#">Breakfast</a><a class="list-group-item list-group-item-action"
+             href="#">Dairy</a><a class="list-group-item list-group-item-action"
+             href="#">Fruit</a><a class="list-group-item list-group-item-action"
+             href="#">Vegetable</a>
+      </div>
+
+      <div class="list-group mt-4">
+        <a class="list-group-item-dark list-group-item active fw-bold">Tags</a> <a class="list-group-item 
+         list-group-item-action"
+             href="#">Banana</a><a class="list-group-item list-group-item-action"
+             href="#">Cheese</a><a class="list-group-item list-group-item-action"
+             href="#">Coffee</a><a class="list-group-item list-group-item-action"
+             href="#">Cucumber</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"></script>
+</body>
+</html>

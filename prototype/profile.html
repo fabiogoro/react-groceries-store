@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        crossorigin="anonymous"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        rel="stylesheet">
+  <title>
+  </title>
+  <style>
+  svg{fill:#ffffff}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark"
+       data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+           href="home.html">Navbar</a> <button class="navbar-toggler"
+           aria-controls="navbarSupportedContent"
+           aria-expanded="false"
+           aria-label="Toggle navigation"
+           data-bs-target="#navbarSupportedContent"
+           data-bs-toggle="collapse"
+           type="button"><span class="navbar-toggler-icon"></span></button>
+      <div id="navbarSupportedContent"
+           class="collapse navbar-collapse">
+        <form class="d-flex w-100 justify-content-center"
+              role="search">
+          <input class="form-control me-2 w-25"
+                aria-label="Search"
+                placeholder="Search"
+                type="search"> <button class="btn btn-outline-secondary"
+                type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex w-auto justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">Contact</a>
+          </li>
+
+          <li class="nav-item text-nowrap">
+            <a class="nav-link"
+                href="cart.html">Cart <span class="badge rounded-pill text-bg-secondary">3</span></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+                href="#"
+                aria-expanded="false"
+                data-bs-toggle="dropdown"
+                role="button">Hello, user</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item"
+                    href="profile.html">View orders</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">My profile</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">My shopping list</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">Log off</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 ps-5">
+    <form>
+      <div class="col col-12 text-center mb-4">
+        <h1>My profile</h1>
+      </div>
+
+      <div class="col col-12 mb-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title text-center fw-bold mb-4">My info</h5>
+
+            <div class="mb-3 form-floating">
+              <input id="name"
+                   class="form-control"
+                   placeholder=""
+                   type="text"
+                   value="user"> <label for="name">Name</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="email"
+                   class="form-control"
+                   disabled
+                   placeholder=""
+                   type="email"
+                   value="user@internet.co"> <label for="email">Email</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="phone"
+                   class="form-control"
+                   placeholder=""
+                   type="text"
+                   value="+111 111 1 11 1"> <label for="phone">Phone</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center fw-bold mb-4">Delivery address</h5>
+
+            <div class="list-group mb-4 mx-lg-5">
+              <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                   href="#">Some st., Somewhere <button class="btn btn-dark"><svg height="1em"
+                   viewbox="0 0 448 512"
+                   xmlns="http://www.w3.org/2000/svg">
+              <path d=
+              "M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+
+              </path></svg></button></a><a class="list-group-item list-group-item-action d-flex justify-content-between 
+               align-items-center"
+                   href="#">Another st., Elsewhere <button class="btn btn-dark"><svg height="1em"
+                   viewbox="0 0 448 512"
+                   xmlns="http://www.w3.org/2000/svg">
+              <path d=
+              "M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+
+              </path></svg></button></a><a class="list-group-item list-group-item-dark list-group-item-action active"
+                   href="#">New address...</a>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="zip"
+                   class="form-control"
+                   placeholder=""
+                   type="text"> <label for="zip">Zip code</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="address"
+                   class="form-control"
+                   placeholder=""
+                   type="text"> <label for="address">Address</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="city"
+                   class="form-control"
+                   placeholder=""
+                   type="text"> <label for="city">City</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="state"
+                   class="form-control"
+                   placeholder=""
+                   type="text"> <label for="state">State</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="country"
+                   class="form-control"
+                   placeholder=""
+                   type="text"> <label for="country">Country</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title text-center fw-bold mb-4">Update password</h5>
+
+            <div class="mb-3 form-floating">
+              <input id="old"
+                   class="form-control"
+                   placeholder=""
+                   type="password"> <label for="old">Old password</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="new"
+                   class="form-control"
+                   placeholder=""
+                   type="password"> <label for="new">New password</label>
+            </div>
+
+            <div class="mb-3 form-floating">
+              <input id="new2"
+                   class="form-control"
+                   placeholder=""
+                   type="password"> <label for="new2">Repeat new password</label>
+            </div>
+            <a class="btn btn-dark"
+                 href="receipt.html">Save changes</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"></script>
+</body>
+</html>

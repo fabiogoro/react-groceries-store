@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        crossorigin="anonymous"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        rel="stylesheet">
+  <title>
+  </title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark"
+       data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+           href="home.html">Navbar</a> <button class="navbar-toggler"
+           aria-controls="navbarSupportedContent"
+           aria-expanded="false"
+           aria-label="Toggle navigation"
+           data-bs-target="#navbarSupportedContent"
+           data-bs-toggle="collapse"
+           type="button"><span class="navbar-toggler-icon"></span></button>
+      <div id="navbarSupportedContent"
+           class="collapse navbar-collapse">
+        <form class="d-flex w-100 justify-content-center"
+              role="search">
+          <input class="form-control me-2 w-25"
+                aria-label="Search"
+                placeholder="Search"
+                type="search"> <button class="btn btn-outline-secondary"
+                type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex w-auto justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">Contact</a>
+          </li>
+
+          <li class="nav-item text-nowrap">
+            <a class="nav-link"
+                href="cart.html">Cart <span class="badge rounded-pill text-bg-secondary">3</span></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+                href="#"
+                aria-expanded="false"
+                data-bs-toggle="dropdown"
+                role="button">Hello, user</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item"
+                    href="#">View orders</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="profile.html">My profile</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">My shopping list</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">Log off</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 ps-5">
+    <form>
+      <div class="row text-center mb-4">
+        <h1>Order review</h1>
+      </div>
+
+      <div class="row">
+        <div class="col col-lg-6 col-12 mb-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-bold">My info</h5>
+
+              <p class="card-text">Name: user</p>
+
+              <p class="card-text">Email: user@internet.co</p>
+
+              <p class="card-text">Phone: +11 1 1 11 1 11</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center fw-bold mb-4">Delivery address</h5>
+
+              <div class="list-group mb-4 mx-lg-5">
+                <a class="list-group-item list-group-item-action"
+                     href="#">Some st., Somewhere</a><a class="list-group-item list-group-item-action"
+                     href="#">Another st., Elsewhere</a><a class="list-group-item list-group-item-dark 
+                      list-group-item-action active"
+                     href="#">New address...</a>
+              </div>
+
+              <div class="mb-3 form-floating">
+                <input id="zip"
+                     class="form-control"
+                     placeholder=""
+                     type="text"> <label for="zip">Zip code</label>
+              </div>
+
+              <div class="mb-3 form-floating">
+                <input id="address"
+                     class="form-control"
+                     placeholder=""
+                     type="text"> <label for="address">Address</label>
+              </div>
+
+              <div class="mb-3 form-floating">
+                <input id="city"
+                     class="form-control"
+                     placeholder=""
+                     type="text"> <label for="city">City</label>
+              </div>
+
+              <div class="mb-3 form-floating">
+                <input id="state"
+                     class="form-control"
+                     placeholder=""
+                     type="text"> <label for="state">State</label>
+              </div>
+
+              <div class="mb-3 form-floating">
+                <input id="country"
+                     class="form-control"
+                     placeholder=""
+                     type="text"> <label for="country">Country</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col col-lg-6 col-12">
+          <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title text-center fw-bold">Order items</h5>
+
+              <h5 class="card-title mt-4">30 items</h5>
+
+              <h5 class="card-title mb-4">$30.00</h5>
+
+              <ul class="list-group mb-4 mx-lg-5">
+                <li class="list-group-item list-group-item-action d-flex justify-content-between"
+                    href="#"><span>10 x Apple</span><span>$10.00</span>
+                </li>
+
+                <li class="list-group-item list-group-item-action d-flex justify-content-between"
+                    href="#"><span>10 x Banana</span><span>$10.00</span>
+                </li>
+
+                <li class="list-group-item list-group-item-action d-flex justify-content-between"
+                    href="#"><span>10 x Coffee</span><span>$10.00</span>
+                </li>
+              </ul>
+              <a class="btn btn-dark"
+                   href="receipt.html">Place order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        crossorigin="anonymous"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        rel="stylesheet">
+  <title>
+  </title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark"
+       data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+           href="home.html">Navbar</a> <button class="navbar-toggler"
+           aria-controls="navbarSupportedContent"
+           aria-expanded="false"
+           aria-label="Toggle navigation"
+           data-bs-target="#navbarSupportedContent"
+           data-bs-toggle="collapse"
+           type="button"><span class="navbar-toggler-icon"></span></button>
+      <div id="navbarSupportedContent"
+           class="collapse navbar-collapse">
+        <form class="d-flex w-100 justify-content-center"
+              role="search">
+          <input class="form-control me-2 w-25"
+                aria-label="Search"
+                placeholder="Search"
+                type="search"> <button class="btn btn-outline-secondary"
+                type="submit">Search</button>
+        </form>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex w-auto justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">About</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"
+                href="#">Contact</a>
+          </li>
+
+          <li class="nav-item text-nowrap">
+            <a class="nav-link"
+                href="cart.html">Cart <span class="badge rounded-pill text-bg-secondary">3</span></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle"
+                href="#"
+                aria-expanded="false"
+                data-bs-toggle="dropdown"
+                role="button">Hello, user</a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item"
+                    href="#">View orders</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="profile.html">My profile</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">My shopping list</a>
+              </li>
+
+              <li>
+                <a class="dropdown-item"
+                    href="#">Log off</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 ps-5">
+    <div class="row text-center mb-4">
+      <h1>My cart</h1>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-6 col-12 mb-4">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><img class="card-img-top img-fluid"
+                 src= 
+                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.5bLEGgrUJw9PXpPA3ReYBwHaGU%26pid%3DApi&f=1&ipt=1d201f95f3933d931915b17bc31fd9719578b47770ed9ec98c8a80c38c26a157&ipo=images"
+                 alt="..."
+                 style="width: 120px;height: 120px;">
+            </div>
+
+            <div class="fw-bold">
+              Apple
+            </div>
+
+            <div>
+              - 10 +<br>
+              <br>
+              $10.00
+            </div>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><img class="card-img-top img-fluid"
+                 src= 
+                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KWVhl0nuomQtvJd1Js719wHaE6%26pid%3DApi&f=1&ipt=320abf549b8d5c8fe12cb6846fd2abaa41f0dae209e44fec8938baf0ad22e57d&ipo=images"
+                 alt="..."
+                 style="width: 120px;height: 120px;">
+            </div>
+
+            <div class="fw-bold">
+              Banana
+            </div>
+
+            <div>
+              - 10 +<br>
+              <br>
+              $10.00
+            </div>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><img class="card-img-top img-fluid"
+                 src= 
+                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.tic7smRD5pkXI7JlLcQKAwHaFo%26pid%3DApi&f=1&ipt=1da3665974faa6caa2353bd57451baff5164a68f05d384cb85948e3055f759dd&ipo=images"
+                 alt="..."
+                 style="width: 120px; height: 120px;">
+            </div>
+
+            <div class="fw-bold">
+              Coffee
+            </div>
+
+            <div>
+              - 10 +<br>
+              <br>
+              $10.00
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col col-lg-6 col-12">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5 class="card-title fw-bold">Total</h5>
+
+            <h5 class="card-title mt-4">30 items</h5>
+
+            <h5 class="card-title mb-4">$30.00</h5>
+            <a class="btn btn-dark"
+                 href="checkout.html">Place order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"></script>
+</body>
+</html>
