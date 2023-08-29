@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import Ratio from 'react-bootstrap/Ratio'
 import Image from 'react-bootstrap/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 function Item({title, image, price, id, detailUrl}) {
   return (
@@ -23,7 +23,7 @@ function Item({title, image, price, id, detailUrl}) {
           <Card.Text>
             <Card.Link href={`${detailUrl}${id}`}>Read more...</Card.Link>
           </Card.Text>
-          <Button variant="dark">Add to cart</Button>
+          <Button variant="dark"><FontAwesomeIcon icon={faCartPlus} /> Add to cart</Button>
         </Card.Body>
       </Card>
     </Col>

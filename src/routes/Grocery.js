@@ -11,7 +11,13 @@ import Carousel from 'react-bootstrap/Carousel'
 
 function Grocery() {
   const id = useLoaderData();
-  let [grocery] = fetchGrocery(id)
+  let [grocery, setGrocery] = useState({})
+  async function fetchData(){
+    setGrocery(await fetchGrocery(id))
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <Container className="mt-4">
@@ -22,7 +28,7 @@ function Grocery() {
               <Row>
                 <Col>
                   <Carousel variant="dark" className="vh-50 text-center">
-                    {grocery.pictures.map((p,i)=>(
+                    {grocery.pictures?.map((p,i)=>(
                       <Carousel.Item key={i}>
                         <img
                           src={`${p.path}`}
