@@ -1,13 +1,13 @@
-import Item from './Item'
-import ItemList from './ItemList'
-import { fetchGroceries } from './util/Api'
-import { fetchCategories } from './util/Api'
+import Item from '../components/Item'
+import ItemList from '../components/ItemList'
+import { fetchGroceries } from '../util/Api'
+import { fetchCategories } from '../util/Api'
 
 function Groceries() {
   function itemsFunction(item, i){
     return <Item key={i} 
       title={item.title}
-      image={item.image_path}
+      image={item.thumbnail}
       price={item.price}
       id={item.id}
       detailUrl={'/grocery/'}

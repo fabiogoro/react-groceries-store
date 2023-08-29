@@ -1,29 +1,19 @@
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import TextInput from './textInput'
 
-function PasswordInput({changeHandler, input}) {
-
+function PasswordInput({changeHandler, input, name, id, label, required}) {
   return (
-    <FloatingLabel
-      className="mb-3 text-start"
-      controlId="password"
-      required
-      label="Password"
-    >
-      <Form.Control
-        name="password"
-        placeholder=""
-        type="password"
-        onChange={changeHandler}
-        value={input.value}
-        isInvalid={input.error}
-        isValid={!input.error&&input.value}
-      />
-      <Form.Control.Feedback type="invalid">
-        {input.error}
-      </Form.Control.Feedback>
-    </FloatingLabel>
-  );
+    <TextInput
+      changeHandler={changeHandler}
+      input={input}
+      id={id || "password"}
+      required={required}
+      type="password"
+      label={label || "Password"}
+      name={name || "password"}
+    ></TextInput>
+  )
 }
 
 export default PasswordInput;

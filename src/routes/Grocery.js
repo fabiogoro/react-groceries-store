@@ -3,23 +3,15 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 import { useLoaderData } from 'react-router-dom'
-import { fetchGrocery } from './util/Api'
+import { fetchGrocery } from '../util/Api'
 import { useEffect, useState } from "react"
 import Carousel from 'react-bootstrap/Carousel'
 
 function Grocery() {
-  let [grocery, setGrocery] = useState(undefined)
   const id = useLoaderData();
-
-  const fetchData = async () => {
-      const result = await fetchGrocery(id)
-      setGrocery(result)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+  let [grocery] = fetchGrocery(id)
 
   return (
     <Container className="mt-4">
@@ -30,10 +22,10 @@ function Grocery() {
               <Row>
                 <Col>
                   <Carousel variant="dark" className="vh-50 text-center">
-                    {grocery.images.posters.map((img,i)=>(
+                    {grocery.pictures.map((p,i)=>(
                       <Carousel.Item key={i}>
                         <img
-                          src={`https://image.tmdb.org/t/p/w500/${img.file_path}`}
+                          src={`${p.path}`}
                           alt="First slide"
                         />
                       </Carousel.Item>
@@ -43,21 +35,22 @@ function Grocery() {
                 <Col>
                   <Card.Body>
                     <Card.Title>
-                      {grocery.title} ({(new Date(grocery.release_date)).getFullYear()})
+                      <strong>
+                        {grocery.title}
+                      </strong>
                       <br/>
-                      Rating: {Math.round(grocery.vote_average*10)}%
+                      ${parseInt(grocery.price).toFixed(2)}
                     </Card.Title>
                     <p>
-                      <strong>Genres: </strong>
-                      {grocery.genres.map((genre,i)=>(
-                        <span key={i}>{`${i?', ':''}${genre.name}`}</span>
-                      ))}
+                      <strong>Category: </strong>
+                      <span>{grocery.category_name}</span>
                     </p>
                     <p>
-                      <strong>Overview:</strong>
+                      <strong>Description:</strong>
                       <br/>
-                      {grocery.overview}
+                      {grocery.description}
                     </p>
+                    <Button variant="dark">Add to cart</Button>
                   </Card.Body>
                 </Col>
               </Row>

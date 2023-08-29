@@ -1,29 +1,81 @@
-const key = 'e03c9290bb3b8e9ce64eb0074847b13d'
-const base = 'https://api.themoviedb.org/3/'
+const base = 'http://localhost:3000/'
 
-export async function fetchGroceries({page, genres, sort_by}){
+export async function fetchGroceries({page, sort_by, categories}){
   const response = await fetch(
-    `${base}discover/movie?page=${page}&sort_by=${sort_by}&with_genres=${genres}&api_key=${key}`)
-  return (await response.json()).results
+    `${base}groceries?sort_by=${sort_by}&categories=${Object.values(categories)}`)
+  return (await response.json())
 }
 
 export async function fetchGrocery(id){
   const response = await fetch(
-    `${base}movie/${id}?append_to_response=images&api_key=${key}`)
+    `${base}grocery/${id}`)
   return (await response.json())
 }
 
 export async function fetchCategories(){
   const response = await fetch(
-    `${base}genre/movie/list?api_key=${key}`)
-  return (await response.json()).genres
+    `${base}categories`)
+  return (await response.json())
 }
-
-const base2 = 'http://localhost:3000/'
 
 export async function postLogin(data){
   const response = await fetch(
-    `${base2}login`, {
+    `${base}login`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  return await response.json()
+}
+
+export async function postLogoff(){
+  const response = await fetch(
+    `${base}logoff`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  return await response.json()
+}
+
+export async function postResetPassword(data){
+  const response = await fetch(
+    `${base}reset`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  return await response.json()
+}
+
+export async function postNewPassword(data){
+  const response = await fetch(
+    `${base}reset/password`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  return await response.json()
+}
+
+export async function postSignUp(data){
+  const response = await fetch(
+    `${base}user`, {
       method: 'POST',
       mode: "cors",
       credentials: "include",
@@ -37,7 +89,7 @@ export async function postLogin(data){
 
 export async function fetchUser(){
   const response = await fetch(
-    `${base2}user`, {
+    `${base}user`, {
       method: 'GET',
       mode: "cors",
       credentials: "include",
