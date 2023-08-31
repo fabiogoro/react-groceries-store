@@ -2,60 +2,40 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useState } from 'react'
 import { postLogin } from '../util/Api'
-import { useNavigate } from 'react-router-dom'
 import EmailInput from '../components/inputs/emailInput'
 import PasswordInput from '../components/inputs/passwordInput'
-import { fetchUser, fetchCart } from '../util/Api'
+import { useForm } from '../hooks/FormHook'
 import Input from '../util/form/input'
+import Alert from 'react-bootstrap/Alert'
 
-function Login({ setUser, cartApi }) {
-  const [inputs, setInputs] = useState({
+function Login({ user }) {
+  const [form] = useForm(postLogin, {
+    error: '',
     email: new Input(),
     password: new Input(),
   })
-  const navigate = useNavigate()
-
-  async function formSubmit(e) {
-    e.preventDefault()
-    const data = new FormData(e.target)
-    const res = await postLogin(Object.fromEntries(data))
-    inputs.password.error = res.error
-    if (res.error) {
-      setInputs({
-        ...inputs,
-      })
-    } else {
-      const user = await fetchUser()
-      const cart = await fetchCart()
-      setUser(user)
-      cartApi.loadCart()
-      navigate('/')
-    }
-  }
-
-  function changeHandler({ target: { id, value, validationMessage } }) {
-    inputs[id].value = value
-    inputs[id].error = validationMessage
-    setInputs({ ...inputs })
-  }
 
   return (
     <Container className="mt-4 px-5 text-center">
-      <Form onSubmit={formSubmit}>
+      {form.data.error!==''?(
+      <Alert variant="danger">
+        {form.data.error}
+      </Alert>
+      ):null}
+      <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
             <Card.Title className="fw-bold mb-4">Log in</Card.Title>
 
             <EmailInput
-              changeHandler={changeHandler}
-              input={inputs['email']}
+              changeHandler={form.changeHandler()}
+              input={form.data['email']}
             ></EmailInput>
 
             <PasswordInput
-              changeHandler={changeHandler}
-              input={inputs['password']}
+              changeHandler={form.changeHandler()}
+              input={form.data['password']}
             ></PasswordInput>
 
             <a href="/reset">Forgot your password?</a>

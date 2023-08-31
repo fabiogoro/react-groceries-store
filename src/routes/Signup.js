@@ -2,95 +2,79 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useState } from 'react'
 import { postSignUp } from '../util/Api'
-import { useNavigate } from 'react-router-dom'
 import EmailInput from '../components/inputs/emailInput'
 import PasswordInput from '../components/inputs/passwordInput'
 import TextInput from '../components/inputs/textInput'
-import { fetchUser } from '../util/Api'
 import Input from '../util/form/input'
+import { useForm } from '../hooks/FormHook'
+import Alert from 'react-bootstrap/Alert'
 
-function Signup({ setUser }) {
-  const [inputs, setInputs] = useState({
+function Signup() {
+  const [form] = useForm(postSignUp, {
+    error: '',
     email: new Input(),
     password: new Input(),
     confirm: new Input(validatePasswords),
     name: new Input(),
     phone: new Input(),
   })
-  const navigate = useNavigate()
-
-  async function formSubmit(e) {
-    e.preventDefault()
-    const data = new FormData(e.target)
-    const res = await postSignUp(Object.fromEntries(data))
-    if (res.error) {
-    inputs.email.error = res.error
-      setInputs({
-        ...inputs,
-      })
-    } else {
-      const user = await fetchUser()
-      setUser(user)
-      navigate('/')
-    }
-  }
 
   function validatePasswords() {
-    if (inputs['password'].value !== inputs['confirm'].value) {
+    if (form.data['password'].value !== form.data['confirm'].value) {
       return 'Passwords must match.'
     }
   }
 
-  function changeHandler({ target: { id, value, validationMessage } }) {
-    inputs[id].value = value
-    inputs[id].error = validationMessage
-    if (inputs[id].validation) {
-      inputs[id].error = inputs[id].validation()
-    }
-    setInputs({ ...inputs })
-  }
-
   return (
     <Container className="mt-4 px-5 text-center">
-      <Form onSubmit={formSubmit}>
+      {form.data.error!==''?(
+        <Alert variant="danger">
+          {form.data.error}
+        </Alert>
+      ):null}
+      <Form onSubmit={form.formSubmit()} noValidate>
         <Card>
           <Card.Body>
             <Card.Title className="fw-bold mb-4">Sign up</Card.Title>
 
             <EmailInput
-              changeHandler={changeHandler}
-              input={inputs['email']}
+              changeHandler={form.changeHandler()}
+              input={form.data['email']}
+              required={true}
             ></EmailInput>
 
             <PasswordInput
-              changeHandler={changeHandler}
-              input={inputs['password']}
+              changeHandler={form.changeHandler()}
+              input={form.data['password']}
+              required={true}
             ></PasswordInput>
 
             <PasswordInput
-              changeHandler={changeHandler}
-              input={inputs['confirm']}
+              changeHandler={form.changeHandler()}
+              input={form.data['confirm']}
               name={'confirm'}
               id={'confirm'}
               label={'Confirm password'}
+              required={true}
             ></PasswordInput>
 
             <TextInput
-              changeHandler={changeHandler}
-              input={inputs['name']}
+              changeHandler={form.changeHandler()}
+              input={form.data['name']}
               name={'name'}
               id={'name'}
               label={'Name'}
+              required={true}
             ></TextInput>
 
             <TextInput
-              changeHandler={changeHandler}
-              input={inputs['phone']}
+              changeHandler={form.changeHandler()}
+              input={form.data['phone']}
               name={'phone'}
               id={'phone'}
               label={'Phone'}
+              maxlength={20}
             ></TextInput>
 
             <Button variant="dark" type="submit">

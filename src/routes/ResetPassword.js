@@ -3,52 +3,33 @@ import Alert from 'react-bootstrap/Alert'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { useState } from 'react'
 import EmailInput from '../components/inputs/emailInput'
 import { postResetPassword } from '../util/Api'
 import Input from '../util/form/input'
+import { useForm } from '../hooks/FormHook'
 
 function ResetPassword({ setUser }) {
-  const [success, setSuccess] = useState('')
-  const [inputs, setInputs] = useState({
+  const [form] = useForm(postResetPassword, {
+    error: '',
+    success: '',
     email: new Input(),
   })
 
-  async function formSubmit(e) {
-    e.preventDefault()
-    const data = new FormData(e.target)
-    const res = await postResetPassword(Object.fromEntries(data))
-    inputs.email.error = res.error
-    if (res.error) {
-      setInputs({
-        ...inputs,
-      })
-    } else {
-      setSuccess(res.success)    
-    }
-  }
-
-  function changeHandler({ target: { id, value, validationMessage } }) {
-    inputs[id].value = value
-    inputs[id].error = validationMessage
-    setInputs({ ...inputs })
-  }
-
   return (
     <Container className="mt-4 px-5 text-center">
-      {success!==''?(
+      {form.data.success!==''?(
       <Alert variant="success">
-        {success}
+        {form.data.success}
       </Alert>
       ):null}
-      <Form onSubmit={formSubmit}>
+      <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
             <Card.Title className="fw-bold mb-4">Reset password</Card.Title>
 
             <EmailInput
-              changeHandler={changeHandler}
-              input={inputs['email']}
+              changeHandler={form.changeHandler()}
+              input={form.data['email']}
             ></EmailInput>
 
             <Button variant="dark" type="submit">
