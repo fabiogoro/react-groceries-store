@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import { postSignUp } from '../util/Api'
@@ -39,7 +38,7 @@ function Signup({ setUser }) {
   }
 
   function validatePasswords() {
-    if (inputs['password'].value != inputs['confirm'].value) {
+    if (inputs['password'].value !== inputs['confirm'].value) {
       return 'Passwords must match.'
     }
   }

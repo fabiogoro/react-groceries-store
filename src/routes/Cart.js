@@ -6,38 +6,16 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useLoaderData } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react"
 
-function Cart() {
-  const id = useLoaderData()
-  let [cart, setCart] = useState([])
-  async function fetchData() {
-    setCart([
-      {
-        product_title: 'Apple',
-        product_thumbnail:
-          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KWVhl0nuomQtvJd1Js719wHaE6%26pid%3DApi&f=1&ipt=320abf549b8d5c8fe12cb6846fd2abaa41f0dae209e44fec8938baf0ad22e57d&ipo=images',
-        product_price: 10,
-      },
-      {
-        product_title: 'Banana',
-        product_thumbnail:
-          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KWVhl0nuomQtvJd1Js719wHaE6%26pid%3DApi&f=1&ipt=320abf549b8d5c8fe12cb6846fd2abaa41f0dae209e44fec8938baf0ad22e57d&ipo=images',
-        product_price: 10,
-      },
-      {
-        product_title: 'Carrot',
-        product_thumbnail:
-          'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.KWVhl0nuomQtvJd1Js719wHaE6%26pid%3DApi&f=1&ipt=320abf549b8d5c8fe12cb6846fd2abaa41f0dae209e44fec8938baf0ad22e57d&ipo=images',
-        product_price: 10,
-      },
-    ])
-  }
+function Cart({ user, cart, cartApi }) {
+  const navigate = useNavigate()
   useEffect(() => {
-    fetchData()
-  }, [])
+    if(user && !user.name) navigate('/login')
+  }, [user])
+
 
   return (
     <Container className="mt-4">
@@ -45,28 +23,39 @@ function Cart() {
         <Col lg="6" xs="12" className="mb-4">
           <ListGroup>
             {cart.map((p) => (
-              <ListGroup.Item className="d-flex justify-content-between align-items-center">
+              <ListGroup.Item
+                key={p.id}
+                className="d-flex justify-content-between align-items-center"
+              >
                 <div>
                   <Image
                     className="card-img-top img-fluid"
-                    src={p.product_thumbnail}
+                    src={p.thumbnail}
                     alt="..."
                     style={{ width: 120, height: 120 }}
                   />
                 </div>
 
-                <div className="fw-bold">{p.product_title}</div>
+                <div className="fw-bold">{p.title}</div>
 
                 <div>
-                  <Button variant="outline-dark" size="sm">
+                  <Button
+                    onClick={cartApi.removeCart(p.id)}
+                    variant="outline-dark"
+                    size="sm"
+                  >
                     <FontAwesomeIcon icon={faMinus} />
                   </Button>{' '}
-                  10{' '}
-                  <Button variant="outline-dark" size="sm">
+                  {p.quantity}{' '}
+                  <Button
+                    onClick={cartApi.addCart(p.id, navigate)}
+                    variant="outline-dark"
+                    size="sm"
+                  >
                     <FontAwesomeIcon icon={faPlus} />
                   </Button>
                   <br />
-                  <br />${p.product_price.toFixed(2)}
+                  <br />${(p.price * p.quantity).toFixed(2)}
                 </div>
               </ListGroup.Item>
             ))}
@@ -78,9 +67,27 @@ function Cart() {
             <Card.Body className="text-center">
               <Card.Title className="fw-bold">Total</Card.Title>
 
-              <Card.Title className="mt-4">30 items</Card.Title>
+              <Card.Title className="mt-4">
+                {cart.length === 0
+                  ? 0: cart.length===1?cart[0].quantity
+                  : cart.reduce((c1, c2) =>
+                    typeof c1 != 'number'
+                      ? c1.quantity + c2.quantity
+                      : c1 + c2.quantity
+                  )}{' '}
+                items
+              </Card.Title>
 
-              <Card.Title className="mb-4">$30.00</Card.Title>
+              <Card.Title className="mb-4">
+                $
+                {cart.length === 0
+                  ? 0: cart.length===1?cart[0].quantity*cart[0].price
+                  : cart.reduce((c1, c2) =>
+                    typeof c1 != 'number'
+                      ? c1.quantity * c1.price + c2.quantity * c2.price
+                      : c1 + c2.quantity * c2.price
+                  )}{' '}
+              </Card.Title>
               <Button variant="dark" href="checkout.html">
                 Place order
               </Button>

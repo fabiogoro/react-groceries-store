@@ -1,13 +1,17 @@
-import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import Ratio from 'react-bootstrap/Ratio'
-import Image from 'react-bootstrap/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { postAddCart, postRemoveCart } from '../util/Api'
+import { useCart } from '../hooks/CartHook'
+import { useNavigate } from 'react-router-dom'
 
-function Item({title, image, price, id, detailUrl}) {
+function Item({title, image, price, id, detailUrl, user, cart, cartApi}) {
+  const navigate = useNavigate()
+  const item = cart?.filter((c)=>c.id===id)[0]
+
+
   return (
     <Col xs="12" lg="3" md="6" className="mt-3">
       <Card>
@@ -23,7 +27,31 @@ function Item({title, image, price, id, detailUrl}) {
           <Card.Text>
             <Card.Link href={`${detailUrl}${id}`}>Read more...</Card.Link>
           </Card.Text>
-          <Button variant="dark"><FontAwesomeIcon icon={faCartPlus} /> Add to cart</Button>
+          
+            {item?(
+              <>
+                <Button
+                  onClick={cartApi.removeCart(id)}
+                    size="sm"
+                  variant="dark">
+                  <FontAwesomeIcon icon={faMinus} /> 
+                </Button>
+              {' '}{item.quantity}{' '}
+                <Button
+                  onClick={cartApi.addCart(id, navigate)}
+                    size="sm"
+                  variant="dark">
+                  <FontAwesomeIcon icon={faPlus} />
+                </Button>
+              </>
+            ):(
+              <Button
+                onClick={cartApi.addCart(id, navigate)}
+                variant="dark">
+                <FontAwesomeIcon icon={faCartPlus} /> Add to cart
+              </Button>
+            )}
+
         </Card.Body>
       </Card>
     </Col>

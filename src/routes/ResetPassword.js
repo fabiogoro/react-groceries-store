@@ -2,11 +2,8 @@ import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
-import { postLogin } from '../util/Api'
-import { useNavigate } from 'react-router-dom'
 import EmailInput from '../components/inputs/emailInput'
 import { postResetPassword } from '../util/Api'
 import Input from '../util/form/input'
@@ -16,7 +13,6 @@ function ResetPassword({ setUser }) {
   const [inputs, setInputs] = useState({
     email: new Input(),
   })
-  const navigate = useNavigate()
 
   async function formSubmit(e) {
     e.preventDefault()
@@ -40,7 +36,7 @@ function ResetPassword({ setUser }) {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {success!=''?(
+      {success!==''?(
       <Alert variant="success">
         {success}
       </Alert>

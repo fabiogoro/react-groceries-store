@@ -17,7 +17,6 @@ function ItemList({title, fetchFunction, fetchCategories, itemsFunction}) {
   let [categories, setCategories] = useState({})
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const fetchData = async (sort_by='title.asc', page=0, categories={}) => {

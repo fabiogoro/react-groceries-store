@@ -2,11 +2,9 @@ import Container from 'react-bootstrap/Container'
 import Alert from 'react-bootstrap/Alert'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
-import { postLogin } from '../util/Api'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import PasswordInput from '../components/inputs/passwordInput'
 import { postNewPassword } from '../util/Api'
 import Input from '../util/form/input'
@@ -17,9 +15,8 @@ function NewPassword({ setUser }) {
     password: new Input(),
     confirm: new Input(validatePasswords),
   })
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, ] = useSearchParams()
   const queryParam = searchParams.get("token")
-  const navigate = useNavigate()
 
   async function formSubmit(e) {
     e.preventDefault()
@@ -38,7 +35,7 @@ function NewPassword({ setUser }) {
   }
 
   function validatePasswords() {
-    if (inputs['password'].value != inputs['confirm'].value) {
+    if (inputs['password'].value !== inputs['confirm'].value) {
       return 'Passwords must match.'
     }
   }
@@ -54,7 +51,7 @@ function NewPassword({ setUser }) {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {success!=''?(
+      {success!==''?(
       <Alert variant="success">
         {success}
       </Alert>
