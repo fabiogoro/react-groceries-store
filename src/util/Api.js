@@ -98,3 +98,42 @@ export async function fetchUser(){
       }})
   return (await response.json())
 }
+
+export async function fetchCart(){
+  const response = await fetch(
+    `${base}cart`, {
+      method: 'GET',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }})
+  return (await response.json())
+}
+
+export async function postAddCart(id){
+  const response = await fetch(
+    `${base}cart/add/${id}`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  return await response.json()
+}
+
+
+export async function postRemoveCart(id){
+  const response = await fetch(
+    `${base}cart/remove/${id}`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  return (await response.json())
+}

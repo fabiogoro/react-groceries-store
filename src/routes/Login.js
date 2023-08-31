@@ -1,17 +1,16 @@
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import { postLogin } from '../util/Api'
 import { useNavigate } from 'react-router-dom'
 import EmailInput from '../components/inputs/emailInput'
 import PasswordInput from '../components/inputs/passwordInput'
-import { fetchUser } from '../util/Api'
+import { fetchUser, fetchCart } from '../util/Api'
 import Input from '../util/form/input'
 
-function Login({ setUser }) {
+function Login({ setUser, cartApi }) {
   const [inputs, setInputs] = useState({
     email: new Input(),
     password: new Input(),
@@ -29,7 +28,9 @@ function Login({ setUser }) {
       })
     } else {
       const user = await fetchUser()
+      const cart = await fetchCart()
       setUser(user)
+      cartApi.loadCart()
       navigate('/')
     }
   }

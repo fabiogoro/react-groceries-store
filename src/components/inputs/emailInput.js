@@ -1,5 +1,3 @@
-import Form from 'react-bootstrap/Form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import TextInput from './textInput'
 
 function EmailInput({ changeHandler, input, name, id, label, required }) {
