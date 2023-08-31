@@ -7,22 +7,18 @@ import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
-import { useEffect } from "react"
+import { useAuth } from '../hooks/AuthHook'
 
-function Cart({ user, cart, cartApi }) {
-  const navigate = useNavigate()
-  useEffect(() => {
-    if(user && !user.name) navigate('/login')
-  }, [user])
-
+function Cart({ user }) {
+  const cart = user.cart
+  useAuth(user)
 
   return (
     <Container className="mt-4">
       <Row>
         <Col lg="6" xs="12" className="mb-4">
           <ListGroup>
-            {cart.map((p) => (
+            {cart.data.map((p) => (
               <ListGroup.Item
                 key={p.id}
                 className="d-flex justify-content-between align-items-center"
@@ -40,7 +36,7 @@ function Cart({ user, cart, cartApi }) {
 
                 <div>
                   <Button
-                    onClick={cartApi.removeCart(p.id)}
+                    onClick={cart.removeCart(p.id)}
                     variant="outline-dark"
                     size="sm"
                   >
@@ -48,7 +44,7 @@ function Cart({ user, cart, cartApi }) {
                   </Button>{' '}
                   {p.quantity}{' '}
                   <Button
-                    onClick={cartApi.addCart(p.id, navigate)}
+                    onClick={cart.addCart(p.id)}
                     variant="outline-dark"
                     size="sm"
                   >
@@ -68,25 +64,11 @@ function Cart({ user, cart, cartApi }) {
               <Card.Title className="fw-bold">Total</Card.Title>
 
               <Card.Title className="mt-4">
-                {cart.length === 0
-                  ? 0: cart.length===1?cart[0].quantity
-                  : cart.reduce((c1, c2) =>
-                    typeof c1 != 'number'
-                      ? c1.quantity + c2.quantity
-                      : c1 + c2.quantity
-                  )}{' '}
-                items
+                {cart.totalItems} items
               </Card.Title>
 
               <Card.Title className="mb-4">
-                $
-                {cart.length === 0
-                  ? 0: cart.length===1?cart[0].quantity*cart[0].price
-                  : cart.reduce((c1, c2) =>
-                    typeof c1 != 'number'
-                      ? c1.quantity * c1.price + c2.quantity * c2.price
-                      : c1 + c2.quantity * c2.price
-                  )}{' '}
+                ${cart.totalPrice}
               </Card.Title>
               <Button variant="dark" href="checkout.html">
                 Place order

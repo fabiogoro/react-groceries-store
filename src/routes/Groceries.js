@@ -3,15 +3,13 @@ import ItemList from '../components/ItemList'
 import { fetchGroceries } from '../util/Api'
 import { fetchCategories } from '../util/Api'
 
-function Groceries({cart, cartApi, user}) {
+function Groceries({user}) {
   function itemsFunction(item, i){
     return <Item key={i} 
       title={item.title}
       image={item.thumbnail}
       price={item.price}
       id={item.id}
-      cart={cart}
-      cartApi={cartApi}
       user={user}
       detailUrl={'/grocery/'}
     />

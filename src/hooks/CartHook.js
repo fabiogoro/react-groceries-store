@@ -1,30 +1,64 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 import { postAddCart, postRemoveCart, fetchCart } from '../util/Api'
-import { useNavigate } from 'react-router-dom'
 
 export const useCart = (user) => {
-  const [data, setData] = useState([]);
-  const api = {}
-
-  api.loadCart = async () => setData(await fetchCart())
+  const cart = new Cart(useState([]), user)
 
   useEffect(() => {
-    api.loadCart()
-  }, []);
+    cart.loadCart()
+  }, [user.data])
 
-  api.addCart = (id, navigate) => {
+  return [cart]
+}
+
+class Cart {
+  constructor([data, setData], user) {
+    this.data = data
+    this.setData = setData
+    this.user = user
+  }
+
+  async loadCart() {
+    this.setData(await fetchCart())
+  }
+
+  addCart(id) {
     return async () => {
-      if(user.name){
-        setData(await postAddCart(id))
+      if (this.user.name) {
+        this.setData(await postAddCart(id))
       } else {
-        navigate('/login')
+        window.location.replace('/login')
       }
     }
   }
 
-  api.removeCart = (id) => {
-    return async () => setData(await postRemoveCart(id))
+  removeCart(id) {
+    return async () => this.setData(await postRemoveCart(id))
   }
 
-  return [data, api];
-};
+  get(id) {
+    return this.data?.filter((c) => c.id === id)[0]
+  }
+
+  get totalItems() {
+    if (this.data.length === 0) return 0
+    if (this.data.length === 1) return this.data[0].quantity
+    return this.data.reduce((c1, c2) => {
+      return typeof c1 != 'number'
+        ? c1.quantity + c2.quantity
+        : c1 + c2.quantity
+    })
+  }
+
+  get totalPrice() {
+    if (this.data.length === 0) return 0
+    if (this.data.length === 1) {
+      return this.data[0].quantity * this.data[0].price
+    }
+    return this.data.reduce((c1, c2) => {
+      return typeof c1 != 'number'
+        ? c1.quantity * c1.price + c2.quantity * c2.price
+        : c1 + c2.quantity * c2.price
+    })
+  }
+}

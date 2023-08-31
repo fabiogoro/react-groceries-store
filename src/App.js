@@ -10,32 +10,23 @@ import Signup from './routes/Signup'
 import ResetPassword from './routes/ResetPassword'
 import NewPassword from './routes/NewPassword'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { fetchUser, fetchCart } from './util/Api'
 import { useCart } from './hooks/CartHook'
+import { useUser } from './hooks/UserHook'
 
 function App() {
-  const [user, setUser] = useState(undefined)
-  let [cart, cartApi] = useCart(user)
-
-  async function loadUser() {
-    const user = await fetchUser()
-    setUser(user)
-  }
-
-  useEffect(() => {
-    loadUser()
-  }, [])
+  const [user] = useUser()
+  let [cart] = useCart(user)
+  user.cart = cart
 
   const router = createBrowserRouter([
-    { path: '/', element: <Groceries cart={cart} cartApi={cartApi} /> },
+    { path: '/', element: <Groceries user={user} /> },
     { path: '/about', element: <About /> },
     { path: '/contact', element: <Contact /> },
     { path: '/signup', element: <Signup /> },
     { path: '/reset', element: <ResetPassword /> },
     { path: '/password', element: <NewPassword /> },
-    { path: '/cart', element: <Cart user={user} cart={cart} cartApi={cartApi} /> },
-    { path: '/login', element: <Login setUser={setUser} cartApi={cartApi} /> },
+    { path: '/cart', element: <Cart user={user} /> },
+    { path: '/login', element: <Login user={user} /> },
     {
       path: '/grocery/:id',
       element: <Grocery />,
@@ -47,7 +38,7 @@ function App() {
 
   return (
     <div>
-      <Header user={user} setUser={setUser} cart={cart}></Header>
+      <Header user={user}></Header>
       <RouterProvider router={router} />
       <Footer></Footer>
     </div>

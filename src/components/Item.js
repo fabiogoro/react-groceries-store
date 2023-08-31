@@ -3,13 +3,10 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
-import { postAddCart, postRemoveCart } from '../util/Api'
-import { useCart } from '../hooks/CartHook'
-import { useNavigate } from 'react-router-dom'
 
-function Item({title, image, price, id, detailUrl, user, cart, cartApi}) {
-  const navigate = useNavigate()
-  const item = cart?.filter((c)=>c.id===id)[0]
+function Item({title, image, price, id, detailUrl, user}) {
+  const cart = user.cart
+  const item = cart.get(id)
 
 
   return (
@@ -31,14 +28,14 @@ function Item({title, image, price, id, detailUrl, user, cart, cartApi}) {
             {item?(
               <>
                 <Button
-                  onClick={cartApi.removeCart(id)}
+                  onClick={cart.removeCart(id)}
                     size="sm"
                   variant="dark">
                   <FontAwesomeIcon icon={faMinus} /> 
                 </Button>
               {' '}{item.quantity}{' '}
                 <Button
-                  onClick={cartApi.addCart(id, navigate)}
+                  onClick={cart.addCart(id)}
                     size="sm"
                   variant="dark">
                   <FontAwesomeIcon icon={faPlus} />
@@ -46,7 +43,7 @@ function Item({title, image, price, id, detailUrl, user, cart, cartApi}) {
               </>
             ):(
               <Button
-                onClick={cartApi.addCart(id, navigate)}
+                onClick={cart.addCart(id)}
                 variant="dark">
                 <FontAwesomeIcon icon={faCartPlus} /> Add to cart
               </Button>
