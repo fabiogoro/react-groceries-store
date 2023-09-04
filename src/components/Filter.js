@@ -1,7 +1,7 @@
 import ListGroup from 'react-bootstrap/ListGroup'
 import { useEffect, useState } from 'react'
 
-function Filter({ clickHandler, fetchFunction, title }) {
+function Filter({ clickHandler, fetchFunction, title, values }) {
   let [filter, setFilter] = useState([])
   useEffect(() => {
     ;(async () => {
@@ -28,6 +28,7 @@ function Filter({ clickHandler, fetchFunction, title }) {
               id={f.name}
               type="checkbox"
               value={f.id}
+              defaultChecked={values.split(',').includes(`${f.id}`)}
               position={i}
               onChange={clickHandler}
               className="me-2"
