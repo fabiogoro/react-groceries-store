@@ -12,6 +12,8 @@ import NewPassword from './routes/NewPassword'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { useCart } from './hooks/CartHook'
 import { useUser } from './hooks/UserHook'
+import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function App() {
   const [user] = useUser()
@@ -41,6 +43,14 @@ function App() {
       <Header user={user}></Header>
       <RouterProvider router={router} />
       <Footer></Footer>
+      <Modal
+        show={cart.data.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
+        <Spinner className=""></Spinner>
+      </Modal>
     </div>
   )
 }

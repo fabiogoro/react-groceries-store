@@ -28,6 +28,8 @@ class Form {
     return async (e) => {
       e.preventDefault()
       if (this.reportValidity(e.target)) {
+        this.data.isLoading = true
+        this.setData({ ...this.data })
         const data = new FormData(e.target)
         const object = Object.fromEntries(data)
         if (this.data.token) object.token = this.data.token
@@ -42,11 +44,15 @@ class Form {
           this.setData({
             ...this.data,
           })
+          this.data.isLoading = false
+          this.setData({ ...this.data })
         } else if (res.success) {
           this.data.success = res.success
           this.setData({
             ...this.data,
           })
+          this.data.isLoading = false
+          this.setData({ ...this.data })
           if (res.redirect) window.location.replace(res.redirect)
         } else {
           window.location.replace('/')

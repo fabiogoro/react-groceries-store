@@ -8,6 +8,8 @@ import PasswordInput from '../components/inputs/passwordInput'
 import { postNewPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
+import Modal from 'react-bootstrap/Card'
+import Spinner from 'react-bootstrap/Card'
 
 function NewPassword({ setUser }) {
   const [searchParams, ] = useSearchParams()
@@ -62,6 +64,14 @@ function NewPassword({ setUser }) {
           </Card.Body>
         </Card>
       </Form>
+      <Modal
+        show={form.data.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
+        <Spinner className=""></Spinner>
+      </Modal>
     </Container>
   )
 }

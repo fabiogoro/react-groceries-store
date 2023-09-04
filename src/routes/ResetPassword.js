@@ -7,6 +7,8 @@ import EmailInput from '../components/inputs/emailInput'
 import { postResetPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
+import Modal from 'react-bootstrap/Card'
+import Spinner from 'react-bootstrap/Card'
 
 function ResetPassword({ setUser }) {
   const [form] = useForm(postResetPassword, {
@@ -38,6 +40,14 @@ function ResetPassword({ setUser }) {
           </Card.Body>
         </Card>
       </Form>
+      <Modal
+        show={form.data.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
+        <Spinner className=""></Spinner>
+      </Modal>
     </Container>
   )
 }

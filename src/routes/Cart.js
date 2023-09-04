@@ -18,7 +18,7 @@ function Cart({ user }) {
       <Row>
         <Col lg="6" xs="12" className="mb-4">
           <ListGroup>
-            {cart.data.map((p) => (
+            {cart.data.cart.map((p) => (
               <ListGroup.Item
                 key={p.id}
                 className="d-flex justify-content-between align-items-center"

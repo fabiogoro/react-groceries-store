@@ -9,6 +9,8 @@ import TextInput from '../components/inputs/textInput'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
+import Modal from 'react-bootstrap/Card'
+import Spinner from 'react-bootstrap/Card'
 
 function Signup() {
   const [form] = useForm(postSignUp, {
@@ -83,6 +85,14 @@ function Signup() {
           </Card.Body>
         </Card>
       </Form>
+      <Modal
+        show={form.data.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
+        <Spinner className=""></Spinner>
+      </Modal>
     </Container>
   )
 }
