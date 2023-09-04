@@ -14,29 +14,29 @@ class Form {
   }
 
   formSubmit() {
-    return async (e)=>{
+    return async (e) => {
       e.preventDefault()
-      if(this.reportValidity(e.target)){
+      if (this.reportValidity(e.target)) {
         const data = new FormData(e.target)
         const object = Object.fromEntries(data)
-        if(this.data.token) object.token = this.data.token
+        if (this.data.token) object.token = this.data.token
         const res = await this.postFunction(object)
-        if(res.error && res.error.field){
+        if (res.error && res.error.field) {
           this.data[res.error.field].error = res.error.message
           this.setData({
             ...this.data,
           })
-        } else if(res.error){
+        } else if (res.error) {
           this.data.error = res.error
           this.setData({
             ...this.data,
           })
-        } else if(res.success) {
+        } else if (res.success) {
           this.data.success = res.success
           this.setData({
             ...this.data,
           })
-          if(res.redirect) window.location.replace(res.redirect)
+          if (res.redirect) window.location.replace(res.redirect)
         } else {
           window.location.replace('/')
         }
@@ -44,11 +44,11 @@ class Form {
     }
   }
 
-  reportValidity(form){
-    for(const input of form.elements){
-      if(this.data[input.id]){
+  reportValidity(form) {
+    for (const input of form.elements) {
+      if (this.data[input.id]) {
         this.validate(input)
-        if(this.data[input.id].error){
+        if (this.data[input.id].error) {
           return false
         }
       }
@@ -56,7 +56,7 @@ class Form {
     return true
   }
 
-  validate(input){
+  validate(input) {
     this.data[input.id].error = input.validationMessage
     if (this.data[input.id].validation) {
       this.data[input.id].error = this.data[input.id].validation()
@@ -65,7 +65,7 @@ class Form {
   }
 
   changeHandler() {
-    return ({ target })=>{
+    return ({ target }) => {
       this.data[target.id].value = target.value
       this.validate(target)
     }

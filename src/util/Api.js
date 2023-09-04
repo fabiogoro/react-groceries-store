@@ -1,8 +1,8 @@
 const base = 'http://localhost:3000/'
 
-export async function fetchGroceries({page, sort_by, categories}){
+export async function fetchGroceries({page, sort_by, categories, q}){
   const response = await fetch(
-    `${base}groceries?sort_by=${sort_by}&categories=${Object.values(categories)}`)
+    `${base}groceries?sort_by=${sort_by}&categories=${categories}&q=${q}&page=${page}`)
   return (await response.json())
 }
 

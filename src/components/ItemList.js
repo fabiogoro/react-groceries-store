@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -8,61 +8,14 @@ import SortSelector from '../components/SortSelector'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
+import { useSearch } from '../hooks/SearchHook'
 
-function ItemList({title, fetchFunction, fetchCategories, itemsFunction}) {
-  let [items, setItems] = useState([])
-  let [isLoading, setIsLoading] = useState(false)
-  let [page, setPage] = useState(1)
-  let [sort_by, setSort_by] = useState('title.asc')
-  let [categories, setCategories] = useState({})
-  const [show, setShow] = useState(false);
+function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
+  const [show, setShow] = useState(false)
 
-  const handleShow = () => setShow(true);
+  const [search] = useSearch(fetchFunction)
 
-  const fetchData = async (sort_by='title.asc', page=0, categories={}) => {
-    setIsLoading(true)
-    try {
-      page++
-      const results = await fetchFunction({page, sort_by, categories})
-      setSort_by(sort_by)
-      setCategories(categories)
-      setItems([...items, ...results])
-      setPage(page)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight || isLoading) {
-      return
-    }
-    fetchData(sort_by, page, categories)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isLoading]);
-
-  async function changeSorting(e){
-    items = []
-    fetchData(e.target.value, 0, categories)
-  }
-
-  async function changeFilters(e){
-    items = []
-    if(categories[e.target.getAttribute(['position'])]){
-      delete categories[e.target.getAttribute(['position'])]
-    } else {
-      categories[e.target.getAttribute(['position'])] = e.target.value
-    }
-    fetchData(sort_by, 0, categories)
-  }
+  const handleShow = () => setShow(true)
 
   return (
     <Container className="min-vh-100" fluid>
@@ -75,19 +28,20 @@ function ItemList({title, fetchFunction, fetchCategories, itemsFunction}) {
             Filters
           </Button>
         </Col>
-        <SortSelector onChange={changeSorting}></SortSelector>
+        <SortSelector onChange={search.changeSorting} value={search.data.sort_by}></SortSelector>
       </Row>
       <Row>
         <Col lg="2" className="d-none d-lg-block">
-          <Filter clickHandler={changeFilters} fetchFunction={fetchCategories} title="Categories"></Filter>
+          <Filter
+            clickHandler={search.changeFilters}
+            fetchFunction={fetchCategories}
+            values={search.data.categories}
+            title="Categories"
+          ></Filter>
         </Col>
         <Col lg="10">
           <Row>
-            {items.length?items.map(itemsFunction):(
-              <Col>
-                Loading...
-              </Col>
-            )}
+            {search.items.length ? search.items.map(itemsFunction) : <Col>Loading...</Col>}
           </Row>
         </Col>
       </Row>
@@ -96,14 +50,24 @@ function ItemList({title, fetchFunction, fetchCategories, itemsFunction}) {
           <Offcanvas.Title>Filters</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Filter clickHandler={changeFilters} fetchFunction={fetchCategories} title="Categories"></Filter>
+          <Filter
+            clickHandler={search.changeFilters}
+            fetchFunction={fetchCategories}
+            values={search.data.categories}
+            title="Categories"
+          ></Filter>
         </Offcanvas.Body>
       </Offcanvas>
-      <Modal show={isLoading} centered contentClassName="bg-transparent border-0" className="d-flex">
+      <Modal
+        show={search.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
         <Spinner className=""></Spinner>
       </Modal>
     </Container>
   )
 }
 
-export default ItemList;
+export default ItemList
