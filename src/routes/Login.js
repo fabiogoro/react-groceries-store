@@ -18,11 +18,9 @@ function Login({ user }) {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {form.data.error!==''?(
-      <Alert variant="danger">
-        {form.data.error}
-      </Alert>
-      ):null}
+      {form.data.error !== '' ? (
+        <Alert variant="danger">{form.data.error}</Alert>
+      ) : null}
       <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>

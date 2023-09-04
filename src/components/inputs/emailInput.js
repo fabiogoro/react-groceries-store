@@ -1,9 +1,8 @@
 import TextInput from './textInput'
 
-function EmailInput({ changeHandler, input, name, id, label, required, maxlength }) {
+function EmailInput({ input, name, id, label, required, maxlength }) {
   return (
     <TextInput
-      changeHandler={changeHandler}
       input={input}
       id={id || 'email'}
       required={required}

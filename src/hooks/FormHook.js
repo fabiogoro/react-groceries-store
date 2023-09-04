@@ -1,6 +1,17 @@
 import { useState } from 'react'
+import { useForm as useHookForm } from 'react-hook-form'
+import Input from '../util/form/input'
 
 export const useForm = (postFunction, inputs) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useHookForm()
+  for(const i of Object.keys(inputs)){
+    if(i instanceof Input) i.register = register
+  }
   const form = new Form(useState(inputs), postFunction)
 
   return [form]
