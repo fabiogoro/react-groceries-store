@@ -9,8 +9,8 @@ import TextInput from '../components/inputs/textInput'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
-import Modal from 'react-bootstrap/Card'
-import Spinner from 'react-bootstrap/Card'
+import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function Signup() {
   const [form] = useForm(postSignUp, {
@@ -30,11 +30,9 @@ function Signup() {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {form.data.error!==''?(
-        <Alert variant="danger">
-          {form.data.error}
-        </Alert>
-      ):null}
+      {form.data.error !== '' ? (
+        <Alert variant="danger">{form.data.error}</Alert>
+      ) : null}
       <Form onSubmit={form.formSubmit()} noValidate>
         <Card>
           <Card.Body>

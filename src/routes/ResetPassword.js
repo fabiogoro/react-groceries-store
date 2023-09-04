@@ -7,8 +7,8 @@ import EmailInput from '../components/inputs/emailInput'
 import { postResetPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
-import Modal from 'react-bootstrap/Card'
-import Spinner from 'react-bootstrap/Card'
+import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function ResetPassword({ setUser }) {
   const [form] = useForm(postResetPassword, {

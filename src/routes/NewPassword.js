@@ -8,12 +8,12 @@ import PasswordInput from '../components/inputs/passwordInput'
 import { postNewPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
-import Modal from 'react-bootstrap/Card'
-import Spinner from 'react-bootstrap/Card'
+import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function NewPassword({ setUser }) {
-  const [searchParams, ] = useSearchParams()
-  const queryParam = searchParams.get("token")
+  const [searchParams] = useSearchParams()
+  const queryParam = searchParams.get('token')
   const [form] = useForm(postNewPassword, {
     error: '',
     success: '',
@@ -30,16 +30,12 @@ function NewPassword({ setUser }) {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {form.data.success!==''?(
-      <Alert variant="success">
-        {form.data.success}
-      </Alert>
-      ):null}
-      {form.data.error!==''?(
-      <Alert variant="danger">
-        {form.data.error}
-      </Alert>
-      ):null}
+      {form.data.success !== '' ? (
+        <Alert variant="success">{form.data.success}</Alert>
+      ) : null}
+      {form.data.error !== '' ? (
+        <Alert variant="danger">{form.data.error}</Alert>
+      ) : null}
       <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
