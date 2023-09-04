@@ -6,6 +6,17 @@ import Badge from 'react-bootstrap/Badge'
 
 function Header({user}) {
   const cart = user.cart
+  const queryParams = new URLSearchParams(window.location.search)
+  const queryParam = queryParams.get('q')
+  
+  function submitSearch(e){
+    e.preventDefault()
+    const params = new URLSearchParams(document.location.search)
+    params.set('q', e.target.elements[0].value)
+    console.log(`${params}`)
+    document.location.replace(`/?${params}`)
+
+  }
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -14,10 +25,13 @@ function Header({user}) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <form className="d-flex w-100 justify-content-center"
-            role="search">
+            role="search" onSubmit={submitSearch}>
             <input className="form-control me-2 w-25"
               aria-label="Search"
-              placeholder="Search"
+              placeholder="search"
+              name="q"
+              id="q"
+              defaultValue={''||queryParam}
               type="search"/> <button className="btn btn-outline-secondary"
                 type="submit">Search</button>
           </form>
