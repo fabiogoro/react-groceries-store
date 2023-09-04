@@ -8,21 +8,22 @@ import PasswordInput from '../components/inputs/passwordInput'
 import { useForm } from '../hooks/FormHook'
 import Input from '../util/form/input'
 import Alert from 'react-bootstrap/Alert'
+import Modal from 'react-bootstrap/Modal'
+import Spinner from 'react-bootstrap/Spinner'
 
 function Login({ user }) {
   const [form] = useForm(postLogin, {
     error: '',
     email: new Input(),
     password: new Input(),
+    isLoading: false
   })
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {form.data.error!==''?(
-      <Alert variant="danger">
-        {form.data.error}
-      </Alert>
-      ):null}
+      {form.data.error !== '' ? (
+        <Alert variant="danger">{form.data.error}</Alert>
+      ) : null}
       <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
@@ -49,6 +50,14 @@ function Login({ user }) {
           </Card.Body>
         </Card>
       </Form>
+      <Modal
+        show={form.data.isLoading}
+        centered
+        contentClassName="bg-transparent border-0"
+        className="d-flex"
+      >
+        <Spinner className=""></Spinner>
+      </Modal>
     </Container>
   )
 }

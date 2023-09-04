@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { postAddCart, postRemoveCart, fetchCart } from '../util/Api'
 
 export const useCart = (user) => {
-  const cart = new Cart(useState([]), user)
+  const cart = new Cart(useState({cart: [], isLoading: false}), user)
 
   useEffect(() => {
     cart.loadCart()
@@ -19,13 +19,17 @@ class Cart {
   }
 
   async loadCart() {
-    this.setData(await fetchCart())
+    this.setData({...this.data, cart: await fetchCart()})
   }
 
   addCart(id) {
     return async () => {
       if (this.user.name) {
-        this.setData(await postAddCart(id))
+        this.data.isLoading = true
+        this.setData({ ...this.data })
+        this.data.cart = await postAddCart(id)
+        this.data.isLoading = false
+        this.setData({ ...this.data })
       } else {
         window.location.replace('/login')
       }
@@ -33,17 +37,23 @@ class Cart {
   }
 
   removeCart(id) {
-    return async () => this.setData(await postRemoveCart(id))
+    return async () => {
+      this.data.isLoading = true
+      this.setData({ ...this.data })
+      this.data.cart = await postRemoveCart(id)
+      this.data.isLoading = false
+      this.setData({ ...this.data })
+    }
   }
 
   get(id) {
-    return this.data?.filter((c) => c.id === id)[0]
+    return this.data.cart?.filter((c) => c.id === id)[0]
   }
 
   get totalItems() {
-    if (this.data.length === 0) return 0
-    if (this.data.length === 1) return this.data[0].quantity
-    return this.data.reduce((c1, c2) => {
+    if (this.data.cart.length === 0) return 0
+    if (this.data.cart.length === 1) return this.data.cart[0].quantity
+    return this.data.cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity + c2.quantity
         : c1 + c2.quantity
@@ -51,11 +61,11 @@ class Cart {
   }
 
   get totalPrice() {
-    if (this.data.length === 0) return 0
-    if (this.data.length === 1) {
-      return this.data[0].quantity * this.data[0].price
+    if (this.data.cart.length === 0) return 0
+    if (this.data.cart.length === 1) {
+      return this.data.cart[0].quantity * this.data.cart[0].price
     }
-    return this.data.reduce((c1, c2) => {
+    return this.data.cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity * c1.price + c2.quantity * c2.price
         : c1 + c2.quantity * c2.price
