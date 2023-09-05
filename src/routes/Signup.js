@@ -29,7 +29,7 @@ function Signup() {
   }
 
   return (
-    <Container className="mt-4 px-5 text-center">
+    <Container className="mt-4 px-5 text-center avoid-footer">
       {form.data.error !== '' ? (
         <Alert variant="danger">{form.data.error}</Alert>
       ) : null}

@@ -36,14 +36,12 @@ class Form {
         const res = await this.postFunction(object)
         if (res.error && res.error.field) {
           this.data[res.error.field].error = res.error.message
+          this.data.isLoading = false
           this.setData({
             ...this.data,
           })
         } else if (res.error) {
           this.data.error = res.error
-          this.setData({
-            ...this.data,
-          })
           this.data.isLoading = false
           this.setData({ ...this.data })
         } else if (res.success) {

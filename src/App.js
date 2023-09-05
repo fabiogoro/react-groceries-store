@@ -7,6 +7,7 @@ import Contact from './routes/Contact'
 import Cart from './routes/Cart'
 import Login from './routes/Login'
 import Signup from './routes/Signup'
+import Checkout from './routes/Checkout'
 import ResetPassword from './routes/ResetPassword'
 import NewPassword from './routes/NewPassword'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -14,6 +15,7 @@ import { useCart } from './hooks/CartHook'
 import { useUser } from './hooks/UserHook'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
+import './styles/app.css'
 
 function App() {
   const [user] = useUser()
@@ -28,6 +30,7 @@ function App() {
     { path: '/reset', element: <ResetPassword /> },
     { path: '/password', element: <NewPassword /> },
     { path: '/cart', element: <Cart user={user} /> },
+    { path: '/checkout', element: <Checkout user={user} /> },
     { path: '/login', element: <Login user={user} /> },
     {
       path: '/grocery/:id',

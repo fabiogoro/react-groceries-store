@@ -18,7 +18,7 @@ function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
   const handleShow = () => setShow(true)
 
   return (
-    <Container className="min-vh-100" fluid>
+    <Container className="min-vh-100 avoid-footer" fluid>
       <Row className="text-center m-3">
         <Col xs={{ span: 8, offset: 2 }}>
           <h1>{title}</h1>
