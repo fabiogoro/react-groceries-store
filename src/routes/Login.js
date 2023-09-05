@@ -24,7 +24,7 @@ function Login({ user }) {
       {form.data.error !== '' ? (
         <Alert variant="danger">{form.data.error}</Alert>
       ) : null}
-      <Form onSubmit={form.formSubmit()}>
+      <Form noValidate onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
             <Card.Title className="fw-bold mb-4">Log in</Card.Title>

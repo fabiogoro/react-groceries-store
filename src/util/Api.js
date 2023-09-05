@@ -87,6 +87,20 @@ export async function postSignUp(data){
   return await response.json()
 }
 
+export async function postCheckout(data){
+  const response = await fetch(
+    `${base}order`, {
+      method: 'POST',
+      mode: "cors",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  return await response.json()
+}
+
 export async function fetchUser(){
   const response = await fetch(
     `${base}user`, {

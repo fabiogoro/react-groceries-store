@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { postAddCart, postRemoveCart, fetchCart } from '../util/Api'
 
 export const useCart = (user) => {
-  const cart = new Cart(useState({cart: [], isLoading: false}), user)
+  const cart = new Cart(useState({cart: undefined, isLoading: false}), user)
 
   useEffect(() => {
     cart.loadCart()
@@ -36,6 +36,10 @@ class Cart {
     }
   }
 
+  get isNotEmpty(){
+    return this.data.cart?.length>0
+  }
+
   removeCart(id) {
     return async () => {
       this.data.isLoading = true
@@ -51,6 +55,7 @@ class Cart {
   }
 
   get totalItems() {
+    if (this.data.cart === undefined) return 0
     if (this.data.cart.length === 0) return 0
     if (this.data.cart.length === 1) return this.data.cart[0].quantity
     return this.data.cart.reduce((c1, c2) => {
@@ -61,6 +66,7 @@ class Cart {
   }
 
   get totalPrice() {
+    if (this.data.cart === undefined) return 0
     if (this.data.cart.length === 0) return 0
     if (this.data.cart.length === 1) {
       return this.data.cart[0].quantity * this.data.cart[0].price

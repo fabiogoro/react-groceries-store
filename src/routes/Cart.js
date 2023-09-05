@@ -14,11 +14,18 @@ function Cart({ user }) {
   useAuth(user)
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4 avoid-footer">
       <Row>
         <Col lg="6" xs="12" className="mb-4">
           <ListGroup>
-            {cart.data.cart.map((p) => (
+            {!cart.isNotEmpty?(
+              <Card>
+                <Card.Body>
+                  The items you add to your cart will appear here.
+                </Card.Body>
+              </Card>
+            ):null}
+            {cart.data.cart?.map((p) => (
               <ListGroup.Item
                 key={p.id}
                 className="d-flex justify-content-between align-items-center"
@@ -70,9 +77,11 @@ function Cart({ user }) {
               <Card.Title className="mb-4">
                 ${cart.totalPrice}
               </Card.Title>
-              <Button variant="dark" href="checkout.html">
-                Place order
-              </Button>
+              {cart.isNotEmpty?(
+                <Button variant="dark" href="checkout">
+                  Place order
+                </Button>
+              ):null}
             </Card.Body>
           </Card>
         </Col>
