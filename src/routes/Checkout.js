@@ -26,7 +26,6 @@ function Checkout({ user }) {
   useAuth(user)
 
   useEffect(() => {
-    console.log(cart.data.cart, user)
     if (cart.data.cart !== undefined && cart.data.cart.length < 1) navigate('/')
   }, [cart])
 
