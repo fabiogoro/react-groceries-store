@@ -4,14 +4,15 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import EmailInput from '../components/inputs/emailInput'
-import { postResetPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
+import { useApiContext } from '../contexts/ApiContext'
 
 function ResetPassword({ setUser }) {
-  const [form] = useForm(postResetPassword, {
+  const api = useApiContext()
+  const [form] = useForm(api.postResetPassword.bind(api), {
     error: '',
     success: '',
     email: new Input(),

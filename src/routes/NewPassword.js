@@ -5,16 +5,17 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useSearchParams } from 'react-router-dom'
 import PasswordInput from '../components/inputs/passwordInput'
-import { postNewPassword } from '../util/Api'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
+import { useApiContext } from '../contexts/ApiContext'
 
 function NewPassword({ setUser }) {
+  const api = useApiContext()
   const [searchParams] = useSearchParams()
   const queryParam = searchParams.get('token')
-  const [form] = useForm(postNewPassword, {
+  const [form] = useForm(api.postNewPassword.bind(api), {
     error: '',
     success: '',
     token: queryParam,

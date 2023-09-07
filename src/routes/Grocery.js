@@ -4,19 +4,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { useLoaderData } from 'react-router-dom'
-import { fetchGrocery } from '../util/Api'
-import { useEffect, useState } from "react"
 import Carousel from 'react-bootstrap/Carousel'
+import { useFetch } from '../hooks/FetchHook'
 
 function Grocery() {
-  const id = useLoaderData();
-  let [grocery, setGrocery] = useState({})
-  async function fetchData(){
-    setGrocery(await fetchGrocery(id))
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const id = useLoaderData()
+
+  const [grocery] = useFetch({f: 'fetchGrocery', id})
 
   return (
     <Container className="mt-4">

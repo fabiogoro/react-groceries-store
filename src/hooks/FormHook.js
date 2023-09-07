@@ -51,7 +51,7 @@ class Form {
           })
           this.data.isLoading = false
           this.setData({ ...this.data })
-          if (res.redirect) window.location.replace(res.redirect)
+          if (res.redirect) window.location.replace(`${res.redirect}`)
         } else {
           window.location.replace('/')
         }

@@ -1,24 +1,25 @@
 import Item from '../components/Item'
 import ItemList from '../components/ItemList'
-import { fetchGroceries } from '../util/Api'
-import { fetchCategories } from '../util/Api'
+import { useApiContext } from '../contexts/ApiContext'
 
-function Groceries({user}) {
+function Groceries() {
+  const api = useApiContext()
+
   function itemsFunction(item, i){
     return <Item key={i} 
       title={item.title}
       image={item.thumbnail}
       price={item.price}
       id={item.id}
-      user={user}
       detailUrl={'/grocery/'}
     />
   }
+
   return (
     <ItemList 
       title="Groceries" 
-      fetchFunction={fetchGroceries}
-      fetchCategories={fetchCategories}
+      fetchFunction={api.fetchGroceries.bind(api)}
+      fetchCategories={api.fetchCategories.bind(api)}
       itemsFunction={itemsFunction}
     />
   )

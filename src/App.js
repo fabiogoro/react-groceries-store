@@ -2,6 +2,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Groceries from './routes/Groceries'
 import Grocery from './routes/Grocery'
+import Order from './routes/Order'
 import About from './routes/About'
 import Contact from './routes/Contact'
 import Cart from './routes/Cart'
@@ -11,30 +12,32 @@ import Checkout from './routes/Checkout'
 import ResetPassword from './routes/ResetPassword'
 import NewPassword from './routes/NewPassword'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { useCart } from './hooks/CartHook'
-import { useUser } from './hooks/UserHook'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
+import { UserProvider } from './contexts/UserContext'
+import { LoaderProvider } from './contexts/LoaderContext'
+import { ApiProvider } from './contexts/ApiContext'
 import './styles/app.css'
 
 function App() {
-  const [user] = useUser()
-  let [cart] = useCart(user)
-  user.cart = cart
-
   const router = createBrowserRouter([
-    { path: '/', element: <Groceries user={user} /> },
+    { path: '/', element: <Groceries/> },
     { path: '/about', element: <About /> },
     { path: '/contact', element: <Contact /> },
     { path: '/signup', element: <Signup /> },
     { path: '/reset', element: <ResetPassword /> },
     { path: '/password', element: <NewPassword /> },
-    { path: '/cart', element: <Cart user={user} /> },
-    { path: '/checkout', element: <Checkout user={user} /> },
-    { path: '/login', element: <Login user={user} /> },
+    { path: '/cart', element: <Cart/> },
+    { path: '/checkout', element: <Checkout/> },
+    { path: '/login', element: <Login/> },
     {
       path: '/grocery/:id',
       element: <Grocery />,
+      loader: async ({ params }) => {
+        return params.id
+      },
+    },
+    {
+      path: '/order/:id',
+      element: <Order />,
       loader: async ({ params }) => {
         return params.id
       },
@@ -43,17 +46,15 @@ function App() {
 
   return (
     <div>
-      <Header user={user}></Header>
-      <RouterProvider router={router} />
-      <Footer></Footer>
-      <Modal
-        show={cart.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
+      <ApiProvider>
+        <LoaderProvider>
+          <UserProvider>
+            <Header></Header>
+            <RouterProvider router={router} />
+            <Footer></Footer>
+          </UserProvider>
+        </LoaderProvider>
+      </ApiProvider>
     </div>
   )
 }

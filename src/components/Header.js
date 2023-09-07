@@ -3,11 +3,12 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge'
+import {useUserContext} from '../contexts/UserContext'
 
-function Header({ user }) {
-  const cart = user.cart
+function Header() {
   const queryParams = new URLSearchParams(window.location.search)
   const queryParam = queryParams.get('q')
+  const user = useUserContext()
 
   function submitSearch(e) {
     e.preventDefault()
@@ -46,7 +47,7 @@ function Header({ user }) {
             {user.isLoggedIn ? (
               <>
                 <Nav.Link href="/cart" className="text-nowrap">
-                  Cart <Badge bg="secondary">{cart.totalItems}</Badge>
+                  Cart <Badge bg="secondary">{user.cart.totalItems}</Badge>
                 </Nav.Link>
                 <NavDropdown
                   menuVariant="dark"

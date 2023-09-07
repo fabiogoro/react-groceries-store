@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { useLoaderContext } from '../contexts/LoaderContext'
 
 export const useSearch = (fetchFunction) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const q = searchParams.get('q') || ''
   const sort_by = searchParams.get('sort_by') || 'title.asc'
   const categories = searchParams.get('categories') || ''
+  const loader = useLoaderContext()
 
   const search = new Search(useState({
     items: [],
-    isLoading: false,
     page: 1,
     sort_by: sort_by,
     categories: categories,
     q: q
-  }), fetchFunction)
+  }), fetchFunction, loader)
 
   useEffect(() => {
     search.newSearch()
@@ -30,10 +31,11 @@ export const useSearch = (fetchFunction) => {
 }
 
 class Search {
-  constructor([data, setData], fetchFunction) {
+  constructor([data, setData], fetchFunction, loader) {
     this.data = data
     this.setData = setData
     this.fetchFunction = fetchFunction
+    this.loader = loader
   }
 
   changeSorting({target: {value}}){
@@ -57,29 +59,25 @@ class Search {
   }
 
   async newSearch() {
-    this.data.isLoading = true
-    this.setData({ ...this.data })
+    this.loader.setIsLoading(true)
     try {
       const results = await this.fetchFunction(this.data)
       this.data.items = results
       this.setData({ ...this.data })
     } finally {
-      this.data.isLoading = false
-      this.setData({ ...this.data })
+      this.loader.setIsLoading(false)
     }
   }
 
   async addSearchPage() {
-    this.data.isLoading = true
-    this.setData({ ...this.data })
+    this.loader.setIsLoading(true)
     try {
       this.data.page++
       const results = await this.fetchFunction(this.data)
       this.data.items = [...this.data.items, ...results]
       this.setData({ ...this.data })
     } finally {
-      this.data.isLoading = false
-      this.setData({ ...this.data })
+      this.loader.setIsLoading(false)
     }
   }
 
@@ -87,7 +85,7 @@ class Search {
     if (
       window.innerHeight + document.documentElement.scrollTop <
       document.documentElement.offsetHeight - 10 ||
-      this.isLoading
+      this.loader.isLoading
     ) {
       return
     }
@@ -96,9 +94,5 @@ class Search {
 
   get items(){
     return this.data.items
-  }
-
-  get isLoading(){
-    return this.data.isLoading
   }
 }
