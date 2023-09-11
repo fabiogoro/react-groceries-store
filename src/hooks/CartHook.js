@@ -1,64 +1,51 @@
-import { useState, useEffect } from 'react'
-import { postAddCart, postRemoveCart, fetchCart } from '../util/Api'
+import { postAddCart, postRemoveCart } from '../api/CartApi'
 
-export const useCart = (user) => {
-  const cart = new Cart(useState({cart: undefined, isLoading: false}), user)
-
-  useEffect(() => {
-    cart.loadCart()
-  }, [user.data])
-
-  return [cart]
-}
-
-class Cart {
-  constructor([data, setData], user) {
-    this.data = data
-    this.setData = setData
+export class Cart {
+  constructor(user, api) {
     this.user = user
-  }
-
-  async loadCart() {
-    this.setData({...this.data, cart: await fetchCart()})
+    this.api = api
   }
 
   addCart(id) {
     return async () => {
       if (this.user.name) {
-        this.data.isLoading = true
-        this.setData({ ...this.data })
-        this.data.cart = await postAddCart(id)
-        this.data.isLoading = false
-        this.setData({ ...this.data })
+        this.user.data.cart = await postAddCart.bind(this.api)(id)
+        this.user.setData({ ...this.user.data })
       } else {
         window.location.replace('/login')
       }
     }
   }
 
+  map(callback){
+    return this.user.data?.cart?.map(callback)
+  }
+
   get isNotEmpty(){
-    return this.data.cart?.length>0
+    return this.user.data?.cart?.length>0
+  }
+
+  get isEmpty(){
+    return this.user.data?.cart !== undefined && this.user.data.cart.length < 1
   }
 
   removeCart(id) {
     return async () => {
-      this.data.isLoading = true
-      this.setData({ ...this.data })
-      this.data.cart = await postRemoveCart(id)
-      this.data.isLoading = false
-      this.setData({ ...this.data })
+      this.user.setData({ ...this.user.data })
+      this.user.data.cart = await postRemoveCart.bind(this.api)(id)
+      this.user.setData({ ...this.user.data })
     }
   }
 
   get(id) {
-    return this.data.cart?.filter((c) => c.id === id)[0]
+    return this.user.data?.cart?.filter((c) => c.id === id)[0]
   }
 
   get totalItems() {
-    if (this.data.cart === undefined) return 0
-    if (this.data.cart.length === 0) return 0
-    if (this.data.cart.length === 1) return this.data.cart[0].quantity
-    return this.data.cart.reduce((c1, c2) => {
+    if (this.user.data?.cart === undefined) return 0
+    if (this.user.data?.cart.length === 0) return 0
+    if (this.user.data?.cart.length === 1) return this.user.data?.cart[0].quantity
+    return this.user.data?.cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity + c2.quantity
         : c1 + c2.quantity
@@ -66,12 +53,12 @@ class Cart {
   }
 
   get totalPrice() {
-    if (this.data.cart === undefined) return 0
-    if (this.data.cart.length === 0) return 0
-    if (this.data.cart.length === 1) {
-      return this.data.cart[0].quantity * this.data.cart[0].price
+    if (this.user.data?.cart === undefined) return 0
+    if (this.user.data?.cart.length === 0) return 0
+    if (this.user.data?.cart.length === 1) {
+      return this.user.data?.cart[0].quantity * this.user.data?.cart[0].price
     }
-    return this.data.cart.reduce((c1, c2) => {
+    return this.user.data?.cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity * c1.price + c2.quantity * c2.price
         : c1 + c2.quantity * c2.price

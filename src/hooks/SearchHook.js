@@ -9,7 +9,6 @@ export const useSearch = (fetchFunction) => {
 
   const search = new Search(useState({
     items: [],
-    isLoading: false,
     page: 1,
     sort_by: sort_by,
     categories: categories,
@@ -24,7 +23,7 @@ export const useSearch = (fetchFunction) => {
   useEffect(() => {
     window.addEventListener('scroll', search.handleScroll.bind(search))
     return () => window.removeEventListener('scroll', search.handleScroll.bind(search))
-  }, [search.isLoading])
+  })
 
   return [search]
 }
@@ -34,6 +33,7 @@ class Search {
     this.data = data
     this.setData = setData
     this.fetchFunction = fetchFunction
+    this.isLoading = true
   }
 
   changeSorting({target: {value}}){
@@ -57,29 +57,24 @@ class Search {
   }
 
   async newSearch() {
-    this.data.isLoading = true
-    this.setData({ ...this.data })
     try {
       const results = await this.fetchFunction(this.data)
       this.data.items = results
       this.setData({ ...this.data })
     } finally {
-      this.data.isLoading = false
-      this.setData({ ...this.data })
+      this.isLoading = false
     }
   }
 
   async addSearchPage() {
-    this.data.isLoading = true
-    this.setData({ ...this.data })
     try {
+      this.isLoading = true
       this.data.page++
       const results = await this.fetchFunction(this.data)
       this.data.items = [...this.data.items, ...results]
       this.setData({ ...this.data })
     } finally {
-      this.data.isLoading = false
-      this.setData({ ...this.data })
+      this.isLoading = false
     }
   }
 
@@ -96,9 +91,5 @@ class Search {
 
   get items(){
     return this.data.items
-  }
-
-  get isLoading(){
-    return this.data.isLoading
   }
 }

@@ -3,10 +3,11 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { useUserContext } from '../contexts/UserContext'
 
-function Item({title, image, price, id, detailUrl, user}) {
-  const cart = user.cart
-  const item = cart.get(id)
+function Item({title, image, price, id, detailUrl}) {
+  const user = useUserContext()
+  const item = user.cart.get(id)
 
 
   return (
@@ -28,14 +29,14 @@ function Item({title, image, price, id, detailUrl, user}) {
             {item?(
               <>
                 <Button
-                  onClick={cart.removeCart(id)}
+                  onClick={user.cart.removeCart(id)}
                     size="sm"
                   variant="dark">
                   <FontAwesomeIcon icon={faMinus} /> 
                 </Button>
               {' '}{item.quantity}{' '}
                 <Button
-                  onClick={cart.addCart(id)}
+                  onClick={user.cart.addCart(id)}
                     size="sm"
                   variant="dark">
                   <FontAwesomeIcon icon={faPlus} />
@@ -43,7 +44,7 @@ function Item({title, image, price, id, detailUrl, user}) {
               </>
             ):(
               <Button
-                onClick={cart.addCart(id)}
+                onClick={user.cart.addCart(id)}
                 variant="dark">
                 <FontAwesomeIcon icon={faCartPlus} /> Add to cart
               </Button>

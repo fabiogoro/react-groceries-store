@@ -2,7 +2,6 @@ import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { postSignUp } from '../util/Api'
 import EmailInput from '../components/inputs/emailInput'
 import PasswordInput from '../components/inputs/passwordInput'
 import TextInput from '../components/inputs/textInput'
@@ -11,9 +10,12 @@ import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
+import { useApiContext } from '../contexts/ApiContext'
+import { postSignUp } from '../api/UserApi'
 
 function Signup() {
-  const [form] = useForm(postSignUp, {
+  const api = useApiContext()
+  const [form] = useForm(postSignUp.bind(api), {
     error: '',
     email: new Input(),
     password: new Input(),
@@ -83,14 +85,6 @@ function Signup() {
           </Card.Body>
         </Card>
       </Form>
-      <Modal
-        show={form.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }

@@ -6,8 +6,6 @@ import Button from 'react-bootstrap/Button'
 import Filter from '../components/Filter'
 import SortSelector from '../components/SortSelector'
 import Offcanvas from 'react-bootstrap/Offcanvas'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
 import { useSearch } from '../hooks/SearchHook'
 
 function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
@@ -58,14 +56,6 @@ function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
           ></Filter>
         </Offcanvas.Body>
       </Offcanvas>
-      <Modal
-        show={search.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }

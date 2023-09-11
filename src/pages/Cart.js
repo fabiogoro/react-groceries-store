@@ -8,9 +8,10 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import { useAuth } from '../hooks/AuthHook'
+import { useUserContext } from '../contexts/UserContext'
 
-function Cart({ user }) {
-  const cart = user.cart
+function Cart() {
+  const user = useUserContext()
   useAuth(user)
 
   return (
@@ -18,14 +19,14 @@ function Cart({ user }) {
       <Row>
         <Col lg="6" xs="12" className="mb-4">
           <ListGroup>
-            {!cart.isNotEmpty?(
+            {!user.cart.isNotEmpty?(
               <Card>
                 <Card.Body>
                   The items you add to your cart will appear here.
                 </Card.Body>
               </Card>
             ):null}
-            {cart.data.cart?.map((p) => (
+            {user.cart.map((p) => (
               <ListGroup.Item
                 key={p.id}
                 className="d-flex justify-content-between align-items-center"
@@ -43,7 +44,7 @@ function Cart({ user }) {
 
                 <div>
                   <Button
-                    onClick={cart.removeCart(p.id)}
+                    onClick={user.cart.removeCart(p.id)}
                     variant="outline-dark"
                     size="sm"
                   >
@@ -51,7 +52,7 @@ function Cart({ user }) {
                   </Button>{' '}
                   {p.quantity}{' '}
                   <Button
-                    onClick={cart.addCart(p.id)}
+                    onClick={user.cart.addCart(p.id)}
                     variant="outline-dark"
                     size="sm"
                   >
@@ -71,13 +72,13 @@ function Cart({ user }) {
               <Card.Title className="fw-bold">Total</Card.Title>
 
               <Card.Title className="mt-4">
-                {cart.totalItems} items
+                {user.cart.totalItems} items
               </Card.Title>
 
               <Card.Title className="mb-4">
-                ${cart.totalPrice}
+                ${user.cart.totalPrice}
               </Card.Title>
-              {cart.isNotEmpty?(
+              {user.cart.isNotEmpty?(
                 <Button variant="dark" href="checkout">
                   Place order
                 </Button>
