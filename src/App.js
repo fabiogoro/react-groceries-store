@@ -7,6 +7,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
+import Orders from './pages/Orders'
 import Signup from './pages/Signup'
 import Checkout from './pages/Checkout'
 import ResetPassword from './pages/ResetPassword'
@@ -26,6 +27,7 @@ function App() {
     { path: '/password', element: <NewPassword /> },
     { path: '/cart', element: <Cart/> },
     { path: '/checkout', element: <Checkout/> },
+    { path: '/orders', element: <Orders/> },
     { path: '/login', element: <Login/> },
     {
       path: '/grocery/:id',
