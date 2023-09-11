@@ -1,6 +1,8 @@
 import Item from '../components/Item'
 import ItemList from '../components/ItemList'
 import { useApiContext } from '../contexts/ApiContext'
+import { fetchGroceries } from '../api/GroceryApi'
+import { fetchCategories } from '../api/CategoryApi'
 
 function Groceries() {
   const api = useApiContext()
@@ -18,8 +20,8 @@ function Groceries() {
   return (
     <ItemList 
       title="Groceries" 
-      fetchFunction={api.fetchGroceries.bind(api)}
-      fetchCategories={api.fetchCategories.bind(api)}
+      fetchFunction={fetchGroceries.bind(api)}
+      fetchCategories={fetchCategories.bind(api)}
       itemsFunction={itemsFunction}
     />
   )

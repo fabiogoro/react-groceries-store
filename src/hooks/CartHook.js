@@ -1,17 +1,16 @@
+import { postAddCart, postRemoveCart } from '../api/CartApi'
+
 export class Cart {
-  constructor(user, loader, api) {
+  constructor(user, api) {
     this.user = user
-    this.loader = loader
     this.api = api
   }
 
   addCart(id) {
     return async () => {
       if (this.user.name) {
-        this.loader.setIsLoading(true)
-        this.user.data.cart = await this.api.postAddCart(id)
+        this.user.data.cart = await postAddCart.bind(this.api)(id)
         this.user.setData({ ...this.user.data })
-        this.loader.setIsLoading(false)
       } else {
         window.location.replace('/login')
       }
@@ -32,11 +31,9 @@ export class Cart {
 
   removeCart(id) {
     return async () => {
-      this.loader.setIsLoading(true)
       this.user.setData({ ...this.user.data })
-      this.user.data.cart = await this.api.postRemoveCart(id)
+      this.user.data.cart = await postRemoveCart.bind(this.api)(id)
       this.user.setData({ ...this.user.data })
-      this.loader.setIsLoading(false)
     }
   }
 

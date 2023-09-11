@@ -17,6 +17,7 @@ import { useUserContext } from '../contexts/UserContext'
 import { useApiContext } from '../contexts/ApiContext'
 import ShortList from '../components/ShortList'
 import AddressManager from '../components/AddressManager'
+import { postCheckout } from '../api/OrderApi'
 
 function Checkout() {
   const api = useApiContext()
@@ -28,7 +29,7 @@ function Checkout() {
     if (user.cart.isEmpty) navigate('/')
   }, [user.cart, navigate])
 
-  const [form] = useForm(api.postCheckout.bind(api), {
+  const [form] = useForm(postCheckout.bind(api), {
     error: '',
     address: new Input(),
     address_id: new Input(),
@@ -88,14 +89,6 @@ function Checkout() {
           </Card.Body>
         </Card>
       </Form>
-      <Modal
-        show={form.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }

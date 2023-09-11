@@ -7,7 +7,12 @@ import * as CategoryApi from './CategoryApi'
 const base = 'http://localhost:3000/'
 
 export class ApiHelper {
+  constructor(setIsLoading){
+    this.setIsLoading = setIsLoading
+  }
+
   async fetchBase(url, method, data) {
+    this.setIsLoading(true)
     const config = {
       method: method || 'GET',
       mode: 'cors',
@@ -17,13 +22,9 @@ export class ApiHelper {
       },
     }
     if (data) config.body = JSON.stringify(data)
-    const response = await fetch(`${base}${url}`, config)
-    return await response.json()
+    const responseJson = await fetch(`${base}${url}`, config)
+    const response = await responseJson.json()
+    this.setIsLoading(false)
+    return response
   }
 }
-
-Object.assign(ApiHelper.prototype, { ...GroceryApi })
-Object.assign(ApiHelper.prototype, { ...CartApi })
-Object.assign(ApiHelper.prototype, { ...UserApi })
-Object.assign(ApiHelper.prototype, { ...OrderApi })
-Object.assign(ApiHelper.prototype, { ...CategoryApi })

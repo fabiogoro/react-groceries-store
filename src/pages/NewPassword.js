@@ -10,12 +10,13 @@ import { useForm } from '../hooks/FormHook'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
 import { useApiContext } from '../contexts/ApiContext'
+import { postNewPassword } from '../api/UserApi'
 
 function NewPassword({ setUser }) {
   const api = useApiContext()
   const [searchParams] = useSearchParams()
   const queryParam = searchParams.get('token')
-  const [form] = useForm(api.postNewPassword.bind(api), {
+  const [form] = useForm(postNewPassword.bind(api), {
     error: '',
     success: '',
     token: queryParam,
@@ -61,14 +62,6 @@ function NewPassword({ setUser }) {
           </Card.Body>
         </Card>
       </Form>
-      <Modal
-        show={form.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }

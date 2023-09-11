@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Cart } from '../hooks/CartHook'
-import { useLoaderContext } from '../contexts/LoaderContext'
 import { useApiContext } from '../contexts/ApiContext'
+import { fetchUser, postLogoff } from '../api/UserApi'
 
 export const useUser = () => {
-  const user = new User(useState(undefined), useLoaderContext(), useApiContext())
+  const user = new User(useState(undefined), useApiContext())
 
   if(!user.data){
     user.loadUser()
@@ -14,16 +14,16 @@ export const useUser = () => {
 }
 
 class User {
-  constructor([data, setData], loader, api) {
+  constructor([data, setData], api) {
     this.data = data
     this.setData = setData
-    this.cart = new Cart(this, loader, api)
+    this.cart = new Cart(this, api)
     this.api = api
     this.loaded = false
   }
 
   async loadUser() {
-    this.setData((await this.api.fetchUser()))
+    this.setData((await fetchUser.bind(this.api)()))
     this.loaded = true
   }
 
@@ -37,7 +37,7 @@ class User {
 
   logoff(){
     return ()=>{
-      this.api.postLogoff()
+      postLogoff.bind(this.api)()
       window.location.replace('/')
     }
   }

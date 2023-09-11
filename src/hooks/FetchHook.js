@@ -8,7 +8,7 @@ export const useFetch = ({f, id}) => {
 
   useEffect(() => {
     async function fetchData(){
-      setData(await api[f]({id}))
+      setData(await f.bind(api)({id}))
     }
     fetchData()
   }, [id, api, f])

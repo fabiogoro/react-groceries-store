@@ -6,11 +6,12 @@ import Button from 'react-bootstrap/Button'
 import { useLoaderData } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
 import { useFetch } from '../hooks/FetchHook'
+import { fetchGrocery } from '../api/GroceryApi'
 
 function Grocery() {
   const id = useLoaderData()
 
-  const [grocery] = useFetch({f: 'fetchGrocery', id})
+  const [grocery] = useFetch({f: fetchGrocery, id})
 
   return (
     <Container className="mt-4">

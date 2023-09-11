@@ -9,10 +9,11 @@ import { useForm } from '../hooks/FormHook'
 import Modal from 'react-bootstrap/Modal'
 import Spinner from 'react-bootstrap/Spinner'
 import { useApiContext } from '../contexts/ApiContext'
+import { postResetPassword } from '../api/UserApi'
 
 function ResetPassword({ setUser }) {
   const api = useApiContext()
-  const [form] = useForm(api.postResetPassword.bind(api), {
+  const [form] = useForm(postResetPassword.bind(api), {
     error: '',
     success: '',
     email: new Input(),
@@ -20,11 +21,9 @@ function ResetPassword({ setUser }) {
 
   return (
     <Container className="mt-4 px-5 text-center">
-      {form.data.success!==''?(
-      <Alert variant="success">
-        {form.data.success}
-      </Alert>
-      ):null}
+      {form.data.success !== '' ? (
+        <Alert variant="success">{form.data.success}</Alert>
+      ) : null}
       <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
@@ -41,14 +40,6 @@ function ResetPassword({ setUser }) {
           </Card.Body>
         </Card>
       </Form>
-      <Modal
-        show={form.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }

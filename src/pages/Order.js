@@ -9,13 +9,14 @@ import Alert from 'react-bootstrap/Alert'
 import { useNavigate } from 'react-router-dom'
 import ShortList from '../components/ShortList'
 import { useFetch } from '../hooks/FetchHook'
+import { fetchOrder } from '../api/OrderApi'
 
 function Order() {
   const navigate = useNavigate()
   const id = useLoaderData()
   const [searchParams, ] = useSearchParams()
   const message = searchParams.get('message') || ''
-  const [order] = useFetch({f: 'fetchOrder', id})
+  const [order] = useFetch({f: fetchOrder, id})
 
   useEffect(() => {
     if (order && Object.keys(order).length<1) navigate('/')

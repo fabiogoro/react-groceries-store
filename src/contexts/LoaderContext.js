@@ -10,22 +10,12 @@ export const useLoaderContext = () => {
 };
 
 export function LoaderProvider({children}){
-  const [isLoading, setIsLoading] = useState(false)
   return (
     <LoaderContext.Provider
       value={{
-        isLoading, setIsLoading
       }}
     >
       {children}
-      <Modal
-        show={isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </LoaderContext.Provider>
 
   )

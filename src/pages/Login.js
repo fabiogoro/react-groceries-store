@@ -7,17 +7,15 @@ import PasswordInput from '../components/inputs/passwordInput'
 import { useForm } from '../hooks/FormHook'
 import Input from '../util/form/input'
 import Alert from 'react-bootstrap/Alert'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
 import { useApiContext } from '../contexts/ApiContext'
+import { postLogin } from '../api/UserApi'
 
 function Login() {
   const api = useApiContext()
-  const [form] = useForm(api.postLogin.bind(api), {
+  const [form] = useForm(postLogin.bind(api), {
     error: '',
     email: new Input(),
     password: new Input(),
-    isLoading: false
   })
 
   return (
@@ -51,14 +49,6 @@ function Login() {
           </Card.Body>
         </Card>
       </Form>
-      <Modal
-        show={form.data.isLoading}
-        centered
-        contentClassName="bg-transparent border-0"
-        className="d-flex"
-      >
-        <Spinner className=""></Spinner>
-      </Modal>
     </Container>
   )
 }
