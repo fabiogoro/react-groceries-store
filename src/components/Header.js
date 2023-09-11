@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge'
-import {useUserContext} from '../contexts/UserContext'
+import { useUserContext } from '../contexts/UserContext'
 
 function Header() {
   const queryParams = new URLSearchParams(window.location.search)
@@ -54,6 +54,9 @@ function Header() {
                   title={`Hello, ${user.name}`}
                   id="basic-nav-dropdown"
                 >
+                  <NavDropdown.Item href="/orders" className="text-nowrap">
+                    My orders
+                  </NavDropdown.Item>
                   <NavDropdown.Item onClick={user.logoff()}>
                     Logoff
                   </NavDropdown.Item>
