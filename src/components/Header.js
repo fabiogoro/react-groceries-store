@@ -51,6 +51,7 @@ function Header() {
             {user.isLoggedIn ? (
               user.data?.is_admin ? (
                 <>
+                  <Nav.Link href="/products">Products</Nav.Link>
                   <NavDropdown
                     menuVariant="dark"
                     title={`Hello, ${user.name}`}

@@ -59,7 +59,8 @@ class Search {
   async newSearch() {
     try {
       const results = await this.fetchFunction(this.data)
-      this.data.items = results
+      this.data.items = results.results
+      this.data.pages = results.pages
       this.setData({ ...this.data })
     } finally {
       this.isLoading = false
@@ -71,7 +72,7 @@ class Search {
       this.isLoading = true
       this.data.page++
       const results = await this.fetchFunction(this.data)
-      this.data.items = [...this.data.items, ...results]
+      this.data.items = [...this.data.items, ...results.results]
       this.setData({ ...this.data })
     } finally {
       this.isLoading = false
@@ -82,7 +83,7 @@ class Search {
     if (
       window.innerHeight + document.documentElement.scrollTop <
       document.documentElement.offsetHeight - 10 ||
-      this.isLoading
+      this.isLoading || this.data.page >= this.data.pages
     ) {
       return
     }

@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Groceries from './pages/Groceries'
+import Products from './pages/Products'
 import Grocery from './pages/Grocery'
 import Order from './pages/Order'
 import About from './pages/About'
@@ -30,6 +31,7 @@ function App() {
     { path: '/checkout', element: <Checkout /> },
     { path: '/orders', element: <Orders /> },
     { path: '/profile', element: <Profile /> },
+    { path: '/products', element: <Products /> },
     { path: '/login', element: <Login /> },
     {
       path: '/grocery/:id',

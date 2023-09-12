@@ -1,24 +1,23 @@
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import { useFetch } from '../hooks/FetchHook'
-import { fetchOrders } from '../api/OrderApi'
+import { fetchGroceries } from '../api/GroceryApi'
 import DataTable from '../components/DataTable'
 import { useSearchParams } from 'react-router-dom'
 
-function Orders() {
+function Products() {
   const [searchParams, setSearchParams] = useSearchParams()
   const page = parseInt(searchParams.get('page')) || 1
-  const [orders] = useFetch({ f: fetchOrders, page })
-  function dataFunction(order) {
+  const [products] = useFetch({ f: fetchGroceries, page, q: '', categories: '', sort_by: 'title.asc' })
+  function dataFunction(product) {
     return (
       <tr>
-        <td>{new Date(order.order_date).toLocaleString()}</td>
-        <td>{order.id}</td>
-        <td>{order.address}</td>
-        <td>{order.total_price}</td>
-        <td>{order.total_products}</td>
+        <td>{product.title}</td>
+        <td>{product.price}</td>
+        <td>{product.category_name}</td>
+        <td>{product.tags}</td>
         <td>
-          <a href={`order/${order.id}`}>more info</a>
+          <a href={`product/${product.id}`}>edit</a>
         </td>
       </tr>
     )
@@ -28,18 +27,17 @@ function Orders() {
     <Container className="mt-4 text-center avoid-footer">
       <Card>
         <Card.Body>
-          <Card.Title className="fw-bold mb-4">My orders</Card.Title>
+          <Card.Title className="fw-bold mb-4">Products</Card.Title>
           <DataTable
-            data={orders?.results}
+            data={products?.results}
             headers={[
-              'Date',
-              'Order #',
-              'Address',
-              'Total price',
-              'Number of products',
+              'Title',
+              'Price',
+              'Category',
+              'Tags',
               '',
             ]}
-            pages={orders?.pages}
+            pages={products?.pages}
             dataFunction={dataFunction}
           ></DataTable>
         </Card.Body>
@@ -48,4 +46,4 @@ function Orders() {
   )
 }
 
-export default Orders
+export default Products
