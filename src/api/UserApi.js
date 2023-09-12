@@ -21,3 +21,11 @@ export async function postNewPassword(data) {
 export async function postSignUp(data) {
   return await this.fetchBase(`user`, 'POST', data)
 }
+
+export async function postProfile(data) {
+  return await this.fetchBase(`profile`, 'POST', data)
+}
+
+export async function deleteAddress(id) {
+  return await this.fetchBase(`address/${id}`, 'DELETE')
+}

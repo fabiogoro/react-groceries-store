@@ -32,6 +32,7 @@ class Form {
           this.setData({ ...this.data })
         } else if (res.success) {
           this.data.success = res.success
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           this.setData({ ...this.data })
           if (res.redirect) window.location.replace(`${res.redirect}`)
         } else {
@@ -55,7 +56,7 @@ class Form {
 
   validate(input) {
     this.data[input.id].error = input.validationMessage
-    if (this.data[input.id].validation) {
+    if (!this.data[input.id].error && this.data[input.id].validation) {
       this.data[input.id].error = this.data[input.id].validation()
     }
     this.setData({ ...this.data })
