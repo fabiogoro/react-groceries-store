@@ -8,6 +8,7 @@ import Contact from './pages/Contact'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Orders from './pages/Orders'
+import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Checkout from './pages/Checkout'
 import ResetPassword from './pages/ResetPassword'
@@ -19,16 +20,17 @@ import './styles/app.css'
 
 function App() {
   const router = createBrowserRouter([
-    { path: '/', element: <Groceries/> },
+    { path: '/', element: <Groceries /> },
     { path: '/about', element: <About /> },
     { path: '/contact', element: <Contact /> },
     { path: '/signup', element: <Signup /> },
     { path: '/reset', element: <ResetPassword /> },
     { path: '/password', element: <NewPassword /> },
-    { path: '/cart', element: <Cart/> },
-    { path: '/checkout', element: <Checkout/> },
-    { path: '/orders', element: <Orders/> },
-    { path: '/login', element: <Login/> },
+    { path: '/cart', element: <Cart /> },
+    { path: '/checkout', element: <Checkout /> },
+    { path: '/orders', element: <Orders /> },
+    { path: '/profile', element: <Profile /> },
+    { path: '/login', element: <Login /> },
     {
       path: '/grocery/:id',
       element: <Grocery />,

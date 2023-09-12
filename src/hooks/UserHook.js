@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Cart } from '../hooks/CartHook'
 import { useApiContext } from '../contexts/ApiContext'
-import { fetchUser, postLogoff } from '../api/UserApi'
+import { fetchUser, postLogoff, deleteAddress } from '../api/UserApi'
 
 export const useUser = () => {
   const user = new User(useState(undefined), useApiContext())

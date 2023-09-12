@@ -1,16 +1,23 @@
 import ListGroup from 'react-bootstrap/ListGroup'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 import { useUserContext } from '../contexts/UserContext'
 import { useEffect, useState } from 'react'
 import ReadOnly from '../components/inputs/readOnly'
 import TextInput from '../components/inputs/textInput'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-function AddressManager({form}) {
+function AddressManager({ form }) {
   const user = useUserContext()
   const [selected, setSelected] = useState(undefined)
 
   useEffect(() => {
-    if(user.data!=={} && user.data?.addresses?.length && form.data.address_id.value===''){
+    if (
+      user.data !== {} &&
+      user.data?.addresses?.length &&
+      form.data.address_id.value === ''
+    ) {
       setSelected(user.data.addresses[0])
       form.data.address_id.value = user.data.addresses[0].id
       form.setData({ ...form.data })
@@ -19,8 +26,10 @@ function AddressManager({form}) {
 
   function onClick(e) {
     e.preventDefault()
-    if(e.target.id){
-      setSelected(user.data.addresses.filter((a) => a.id === parseInt(e.target.id))[0])
+    if (e.target.id) {
+      setSelected(
+        user.data.addresses.filter((a) => a.id === parseInt(e.target.id))[0]
+      )
       form.data.address_id.value = e.target.id
       form.setData({ ...form.data })
     }
@@ -37,8 +46,8 @@ function AddressManager({form}) {
             key={a.id}
             variant={selected?.id === a.id ? 'dark' : ''}
             className={`d-flex justify-content-between align-items-center ${
-                            selected?.id === a.id ? 'active' : ''
-                          }`}
+              selected?.id === a.id ? 'active' : ''
+            }`}
           >
             <Col id={a.id} onClick={onClick}>
               {a.address}, {a.city}, {a.country}
@@ -52,10 +61,12 @@ function AddressManager({form}) {
           key={0}
           variant={!selected ? 'dark' : ''}
           className={`d-flex justify-content-between align-items-center ${
-                          !selected ? 'active' : ''
-                        }`}
+            !selected ? 'active' : ''
+          }`}
         >
-          <Col id={0} onClick={onClick}>New address...</Col>
+          <Col id={0} onClick={onClick}>
+            New address...
+          </Col>
         </ListGroup.Item>
       </ListGroup>
       {selected ? (
@@ -69,23 +80,11 @@ function AddressManager({form}) {
             required={true}
             className="visually-hidden"
           ></TextInput>
-          <ReadOnly
-            label="Zip code"
-            value={selected.zip_code}
-          ></ReadOnly>
-          <ReadOnly
-            label="Address"
-            value={selected.address}
-          ></ReadOnly>
+          <ReadOnly label="Zip code" value={selected.zip_code}></ReadOnly>
+          <ReadOnly label="Address" value={selected.address}></ReadOnly>
           <ReadOnly label="City" value={selected.city}></ReadOnly>
-          <ReadOnly
-            label="State"
-            value={selected.state}
-          ></ReadOnly>
-          <ReadOnly
-            label="Country"
-            value={selected.country}
-          ></ReadOnly>
+          <ReadOnly label="State" value={selected.state}></ReadOnly>
+          <ReadOnly label="Country" value={selected.country}></ReadOnly>
         </>
       ) : (
         <>
@@ -132,8 +131,7 @@ function AddressManager({form}) {
         </>
       )}
     </>
-  );
-
+  )
 }
 
-export default AddressManager;
+export default AddressManager

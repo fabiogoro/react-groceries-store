@@ -57,6 +57,9 @@ function Header() {
                   <NavDropdown.Item href="/orders" className="text-nowrap">
                     My orders
                   </NavDropdown.Item>
+                  <NavDropdown.Item href="/profile" className="text-nowrap">
+                    My profile
+                  </NavDropdown.Item>
                   <NavDropdown.Item onClick={user.logoff()}>
                     Logoff
                   </NavDropdown.Item>

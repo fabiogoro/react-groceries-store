@@ -1,7 +1,11 @@
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import { useEffect } from 'react'
 
-function TextInput({patternMessage, changeHandler, input, name, id, label, required, type, minlength, maxlength, pattern, className}) {
+function TextInput({patternMessage, changeHandler, input, name, id, label, required, type, minlength, maxlength, pattern, className, defaultValue}) {
+  useEffect(() => {
+    if (defaultValue) input.value = defaultValue
+  }, [defaultValue])
 
   return (
     <FloatingLabel
