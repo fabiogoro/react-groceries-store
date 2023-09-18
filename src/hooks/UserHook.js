@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Cart } from '../hooks/CartHook'
 import { useApiContext } from '../contexts/ApiContext'
-import { fetchUser, postLogoff, deleteAddress } from '../api/UserApi'
+import { fetchUser, postLogoff } from '../api/UserApi'
 
 export const useUser = () => {
   const user = new User(useState(undefined), useApiContext())
 
-  if(!user.data){
-    user.loadUser()
-  }
+  useEffect(()=>{
+    if(!user.data){
+      user.loadUser()
+    }
+  })
 
   return [user]
 }
@@ -33,6 +35,10 @@ class User {
 
   get isLoggedIn(){
     return (this.data===undefined || this.name)
+  }
+
+  get isAdmin(){
+    return (this.data===undefined || this.data.is_admin)
   }
 
   logoff(){

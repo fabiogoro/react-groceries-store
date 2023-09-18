@@ -1,6 +1,8 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Groceries from './pages/Groceries'
+import Products from './pages/Products'
+import Product from './pages/Product'
 import Grocery from './pages/Grocery'
 import Order from './pages/Order'
 import About from './pages/About'
@@ -8,6 +10,7 @@ import Contact from './pages/Contact'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
 import Orders from './pages/Orders'
+import MyOrders from './pages/MyOrders'
 import Profile from './pages/Profile'
 import Signup from './pages/Signup'
 import Checkout from './pages/Checkout'
@@ -29,11 +32,21 @@ function App() {
     { path: '/cart', element: <Cart /> },
     { path: '/checkout', element: <Checkout /> },
     { path: '/orders', element: <Orders /> },
+    { path: '/myorders', element: <MyOrders /> },
     { path: '/profile', element: <Profile /> },
+    { path: '/products', element: <Products /> },
+    { path: '/product', element: <Product /> },
     { path: '/login', element: <Login /> },
     {
       path: '/grocery/:id',
       element: <Grocery />,
+      loader: async ({ params }) => {
+        return params.id
+      },
+    },
+    {
+      path: '/product/:id',
+      element: <Product />,
       loader: async ({ params }) => {
         return params.id
       },

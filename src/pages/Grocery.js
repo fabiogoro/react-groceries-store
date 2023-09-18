@@ -7,9 +7,15 @@ import { useLoaderData } from 'react-router-dom'
 import Carousel from 'react-bootstrap/Carousel'
 import { useFetch } from '../hooks/FetchHook'
 import { fetchGrocery } from '../api/GroceryApi'
+import { useUserContext } from '../contexts/UserContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus, faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from 'react'
 
 function Grocery() {
   const id = useLoaderData()
+  const user = useUserContext()
+  const item = user.cart.get(parseInt(id))
 
   const [grocery] = useFetch({f: fetchGrocery, id})
 
@@ -50,7 +56,45 @@ function Grocery() {
                       <br/>
                       {grocery.description}
                     </p>
-                    <Button variant="dark">Add to cart</Button>
+                    {(grocery.calories &&
+                      grocery.carbohydrates &&
+                      grocery.fats &&
+                      grocery.proteins)?(
+                        <p>
+                          <strong>Nutrition facts:</strong>
+                          <br/>
+                          Calories: {grocery.calories} kcal
+                          <br/>
+                          Carbohydrates: {grocery.carbohydrates} g
+                          <br/>
+                          Proteins: {grocery.proteins} g
+                          <br/>
+                          Fats: {grocery.fats} g
+                        </p>
+                      ):null}
+                    {item?(
+                      <>
+                        <Button
+                          onClick={user.cart.removeCart(id)}
+                          size="sm"
+                          variant="dark">
+                          <FontAwesomeIcon icon={faMinus} /> 
+                        </Button>
+                        {' '}{item.quantity}{' '}
+                        <Button
+                          onClick={user.cart.addCart(id)}
+                          size="sm"
+                          variant="dark">
+                          <FontAwesomeIcon icon={faPlus} />
+                        </Button>
+                      </>
+                    ):(
+                      <Button
+                        onClick={user.cart.addCart(id)}
+                        variant="dark">
+                        <FontAwesomeIcon icon={faCartPlus} /> Add to cart
+                      </Button>
+                    )}
                   </Card.Body>
                 </Col>
               </Row>

@@ -1,20 +1,19 @@
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import { useFetch } from '../hooks/FetchHook'
-import { fetchOrders } from '../api/OrderApi'
+import { fetchMyOrders } from '../api/OrderApi'
 import DataTable from '../components/DataTable'
 import { useSearchParams } from 'react-router-dom'
 
-function Orders() {
+function MyOrders() {
   const [searchParams, ] = useSearchParams()
   const page = parseInt(searchParams.get('page')) || 1
   const q = searchParams.get('q') || ''
-  const [orders] = useFetch({ f: fetchOrders, page, q })
+  const [orders] = useFetch({ f: fetchMyOrders, page, q })
   function dataFunction(order) {
     return (
       <tr key={order.id}>
         <td>{new Date(order.order_date).toLocaleString()}</td>
-        <td>{order.user_email}</td>
         <td>{order.id}</td>
         <td>{order.address}</td>
         <td>{order.total_price}</td>
@@ -30,12 +29,11 @@ function Orders() {
     <Container className="mt-4 text-center avoid-footer">
       <Card>
         <Card.Body>
-          <Card.Title className="fw-bold mb-4">Recent orders</Card.Title>
+          <Card.Title className="fw-bold mb-4">My orders</Card.Title>
           <DataTable
             data={orders?.results}
             headers={[
               'Date',
-              'User',
               'Order #',
               'Address',
               'Total price',
@@ -43,7 +41,7 @@ function Orders() {
               '',
             ]}
             pages={orders?.pages}
-            filterPlaceholder="Filter by user email or order #"
+            filterPlaceholder="Filter by order #"
             dataFunction={dataFunction}
           ></DataTable>
         </Card.Body>
@@ -52,4 +50,4 @@ function Orders() {
   )
 }
 
-export default Orders
+export default MyOrders

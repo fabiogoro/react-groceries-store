@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import { useEffect } from 'react'
 
-function TextInput({patternMessage, changeHandler, input, name, id, label, required, type, minlength, maxlength, pattern, className, defaultValue}) {
+function TextInput({patternMessage, changeHandler, input, name, id, label, required, type, minlength, maxlength, pattern, className, defaultValue, step}) {
   useEffect(() => {
     if (defaultValue) input.value = defaultValue
   }, [defaultValue])
@@ -15,7 +15,7 @@ function TextInput({patternMessage, changeHandler, input, name, id, label, requi
     >
       <Form.Control
         name={name||"text"}
-        placeholder=""
+        placeholder={defaultValue||""}
         type={type||"text"}
         onChange={changeHandler}
         isInvalid={input.error}
@@ -24,8 +24,8 @@ function TextInput({patternMessage, changeHandler, input, name, id, label, requi
         required={required||false}
         maxLength={maxlength||80}
         minLength={minlength||6}
+        step={step||""}
         pattern={pattern||".*"}
-        {...input.register}
       />
       <Form.Control.Feedback type="invalid">
         {input.error?(input.error.includes('format')?patternMessage:input.error):''}

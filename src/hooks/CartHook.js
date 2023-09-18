@@ -42,10 +42,13 @@ export class Cart {
   }
 
   get totalItems() {
-    if (this.user.data?.cart === undefined) return 0
-    if (this.user.data?.cart.length === 0) return 0
-    if (this.user.data?.cart.length === 1) return this.user.data?.cart[0].quantity
-    return this.user.data?.cart.reduce((c1, c2) => {
+    return Cart.totalItems(this.user.data?.cart)
+  }
+
+  static totalItems(cart){
+    if (cart === undefined || cart.length === 0) return 0
+    if (cart.length === 1) return cart[0].quantity
+    return cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity + c2.quantity
         : c1 + c2.quantity
@@ -53,12 +56,15 @@ export class Cart {
   }
 
   get totalPrice() {
-    if (this.user.data?.cart === undefined) return 0
-    if (this.user.data?.cart.length === 0) return 0
-    if (this.user.data?.cart.length === 1) {
-      return this.user.data?.cart[0].quantity * this.user.data?.cart[0].price
+    return Cart.totalPrice(this.user.data?.cart)
+  }
+
+  static totalPrice(cart) {
+    if (cart === undefined || cart.length === 0) return 0
+    if (cart.length === 1) {
+      return cart[0].quantity * cart[0].price
     }
-    return this.user.data?.cart.reduce((c1, c2) => {
+    return cart.reduce((c1, c2) => {
       return typeof c1 != 'number'
         ? c1.quantity * c1.price + c2.quantity * c2.price
         : c1 + c2.quantity * c2.price

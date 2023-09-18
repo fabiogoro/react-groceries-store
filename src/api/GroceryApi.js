@@ -4,5 +4,11 @@ export async function fetchGroceries({ page, sort_by, categories, q }) {
   )
 }
 export async function fetchGrocery({id}) {
-  return await this.fetchBase(`grocery/${id}`)
+  if(id){
+    return await this.fetchBase(`grocery/${id}`)
+  }
+}
+
+export async function postGrocery(data){
+  return await this.fetchBase(`grocery/`, 'POST', data)
 }

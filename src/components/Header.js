@@ -42,29 +42,49 @@ function Header() {
             </button>
           </form>
           <Nav className="me-auto justify-content-end">
-            <Nav.Link href="/about">About</Nav.Link>
-            <Nav.Link href="/contact">Contact</Nav.Link>
-            {user.isLoggedIn ? (
+            {!user.isLoggedIn || !user.data?.is_admin ? (
               <>
-                <Nav.Link href="/cart" className="text-nowrap">
-                  Cart <Badge bg="secondary">{user.cart.totalItems}</Badge>
-                </Nav.Link>
-                <NavDropdown
-                  menuVariant="dark"
-                  title={`Hello, ${user.name}`}
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item href="/orders" className="text-nowrap">
-                    My orders
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="/profile" className="text-nowrap">
-                    My profile
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={user.logoff()}>
-                    Logoff
-                  </NavDropdown.Item>
-                </NavDropdown>
+                <Nav.Link href="/about">About</Nav.Link>
+                <Nav.Link href="/contact">Contact</Nav.Link>
               </>
+            ) : null}
+            {user.isLoggedIn ? (
+              user.data?.is_admin ? (
+                <>
+                  <Nav.Link href="/products">Products</Nav.Link>
+                  <Nav.Link href="/orders">Orders</Nav.Link>
+                  <NavDropdown
+                    menuVariant="dark"
+                    title={`Hello, ${user.name}`}
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item onClick={user.logoff()}>
+                      Logoff
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              ) : (
+                <>
+                  <Nav.Link href="/cart" className="text-nowrap">
+                    Cart <Badge bg="secondary">{user.cart.totalItems}</Badge>
+                  </Nav.Link>
+                  <NavDropdown
+                    menuVariant="dark"
+                    title={`Hello, ${user.name}`}
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item href="/myorders" className="text-nowrap">
+                      My orders
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="/profile" className="text-nowrap">
+                      My profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={user.logoff()}>
+                      Logoff
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </>
+              )
             ) : (
               <>
                 <Nav.Link href="/login" className="text-nowrap">
