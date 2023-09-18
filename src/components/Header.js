@@ -52,6 +52,7 @@ function Header() {
               user.data?.is_admin ? (
                 <>
                   <Nav.Link href="/products">Products</Nav.Link>
+                  <Nav.Link href="/orders">Orders</Nav.Link>
                   <NavDropdown
                     menuVariant="dark"
                     title={`Hello, ${user.name}`}
@@ -72,7 +73,7 @@ function Header() {
                     title={`Hello, ${user.name}`}
                     id="basic-nav-dropdown"
                   >
-                    <NavDropdown.Item href="/orders" className="text-nowrap">
+                    <NavDropdown.Item href="/myorders" className="text-nowrap">
                       My orders
                     </NavDropdown.Item>
                     <NavDropdown.Item href="/profile" className="text-nowrap">
