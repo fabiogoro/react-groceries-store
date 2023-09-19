@@ -48,7 +48,7 @@ function Grocery() {
                       ${parseInt(grocery.price).toFixed(2)}
                     </Card.Title>
                     <p>
-                      <strong>Category: </strong>
+                      <strong>Categories: </strong>
                       <span>{grocery.category_name}</span>
                     </p>
                     <p>

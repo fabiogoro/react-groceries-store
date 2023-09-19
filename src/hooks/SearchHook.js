@@ -44,15 +44,13 @@ class Search {
 
   changeFilters(e) {
     const params = new URLSearchParams(document.location.search)
-    const categories = params.get('categories')?.split(',') || []
-    const index = categories.indexOf(e.target.value)
-    if(index>-1){
-      categories.splice(index, 1)
+    if(!e.target.checked){
+      params.delete('categories')
+      params.delete('children')
     } else {
-      categories.push(e.target.value)
+      params.set('categories', e.target.value)
+      params.set('children', e.target.getAttribute('childselector'))
     }
-    if(categories.length) params.set('categories', categories.join(','))
-    else params.delete('categories')
     document.location.replace(`/?${params}`)
   }
 
