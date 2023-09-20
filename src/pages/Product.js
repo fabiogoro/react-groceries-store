@@ -76,16 +76,16 @@ function Product() {
                       label={'Title'}
                       required={true}
                     ></TextInput>
-                    <TextInput
+                    <NumberInput
                       changeHandler={form.changeHandler()}
                       input={form.data['price']}
                       defaultValue={grocery?.price}
                       name={'price'}
                       id={'price'}
                       label={'Price'}
-                      type={'number'}
+                      step={0.01}
                       required={true}
-                    ></TextInput>
+                    ></NumberInput>
                     <TextInput
                       changeHandler={form.changeHandler()}
                       input={form.data['description']}

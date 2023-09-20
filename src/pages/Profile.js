@@ -10,22 +10,18 @@ import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
 import Row from 'react-bootstrap/Row'
 import { useAuth } from '../hooks/AuthHook'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '../contexts/UserContext'
 import { useApiContext } from '../contexts/ApiContext'
 import AddressManager from '../components/AddressManager'
 import { postProfile } from '../api/UserApi'
+import { useSearchParams } from 'react-router-dom'
 
 function Profile() {
   const api = useApiContext()
   const user = useUserContext()
-  const navigate = useNavigate()
+  const [searchParams, ] = useSearchParams()
+  const message = searchParams.get('message') || ''
   useAuth(user)
-
-  useEffect(() => {
-    if (user.cart.isEmpty) navigate('/')
-  }, [user.cart, navigate])
 
   function validatePasswords() {
     if (
@@ -46,7 +42,7 @@ function Profile() {
 
   const [form] = useForm(postProfile.bind(api), {
     error: '',
-    success: '',
+    success: message,
     phone: new Input(),
     old_password: new Input(),
     new_password: new Input(validateNewPassword),

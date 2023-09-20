@@ -36,17 +36,18 @@ function Cart() {
                     className="card-img-top img-fluid"
                     src={p.thumbnail}
                     alt="..."
-                    style={{ width: 120, height: 120 }}
+                    style={{ width: 100, height: 40 }}
                   />
                 </div>
 
                 <div className="fw-bold">{p.title}</div>
 
-                <div>
+                <div className="text-center my-4">
                   <Button
                     onClick={user.cart.removeCart(p.id)}
                     variant="outline-dark"
                     size="sm"
+                    className="mx-2"
                   >
                     <FontAwesomeIcon icon={faMinus} />
                   </Button>{' '}
@@ -55,6 +56,7 @@ function Cart() {
                     onClick={user.cart.addCart(p.id)}
                     variant="outline-dark"
                     size="sm"
+                    className="mx-2"
                   >
                     <FontAwesomeIcon icon={faPlus} />
                   </Button>
