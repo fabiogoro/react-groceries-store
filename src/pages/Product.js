@@ -41,7 +41,7 @@ function Product() {
   useAdmin()
 
   function optionFunction(category) {
-    return <option value={category.id}>{category.name}</option>
+    return <option key={category.id} value={category.id}>{category.name}</option>
   }
 
   return (

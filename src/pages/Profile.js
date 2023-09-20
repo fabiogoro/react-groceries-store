@@ -79,7 +79,7 @@ function Profile() {
               <Card>
                 <Card.Body>
                   <Card.Title className="fw-bold mb-4">My info</Card.Title>
-                  <ReadOnly label="Name" value={user.data?.name}></ReadOnly>
+                  <ReadOnly id="name" label="Name" value={user.data?.name}></ReadOnly>
                   <ReadOnly label="Email" value={user.data?.email}></ReadOnly>
                   <TextInput
                     changeHandler={form.changeHandler()}
