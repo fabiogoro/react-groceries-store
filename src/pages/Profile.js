@@ -8,16 +8,12 @@ import PasswordInput from '../components/inputs/passwordInput'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
-import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { useAuth } from '../hooks/AuthHook'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUserContext } from '../contexts/UserContext'
 import { useApiContext } from '../contexts/ApiContext'
-import ShortList from '../components/ShortList'
 import AddressManager from '../components/AddressManager'
 import { postProfile } from '../api/UserApi'
 
@@ -41,8 +37,8 @@ function Profile() {
 
   function validateNewPassword() {
     if (
-      form.data['new_password'].value.length == 0 &&
-      form.data['old_password'].value.length != 0
+      form.data['new_password'].value.length === 0 &&
+      form.data['old_password'].value.length !== 0
     ) {
       return 'Please fill in your new password.'
     }
