@@ -1,12 +1,12 @@
 import Form from 'react-bootstrap/Form'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 
-function ReadOnly({value, label}) {
+function ReadOnly({value, label, id}) {
 
   return (
     <FloatingLabel
       className="text-start"
-      controlId={value||"text"}
+      controlId={id||value||"text"}
       label={label||"text"}
     >
       <Form.Control
