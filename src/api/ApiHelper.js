@@ -1,13 +1,7 @@
-import * as GroceryApi from './GroceryApi'
-import * as CartApi from './CartApi'
-import * as UserApi from './UserApi'
-import * as OrderApi from './OrderApi'
-import * as CategoryApi from './CategoryApi'
-
 const base = 'http://localhost:3000/'
 
 export class ApiHelper {
-  constructor(setIsLoading){
+  constructor(setIsLoading) {
     this.setIsLoading = setIsLoading
   }
 

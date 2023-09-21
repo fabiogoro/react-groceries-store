@@ -9,5 +9,5 @@ export const useAdmin = () => {
   useEffect(() => {
     if(!user.isLoggedIn) navigate('/login')
     else if(!user.isAdmin) navigate('/')
-  }, [user.data])
+  }, [user.isAdmin, user.isLoggedIn, navigate])
 }

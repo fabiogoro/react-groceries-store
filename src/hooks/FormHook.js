@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Input from '../util/form/input'
 
 export const useForm = (postFunction, inputs) => {
   const form = new Form(useState(inputs), postFunction)

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -19,7 +19,7 @@ function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
     <Container className="min-vh-100 avoid-footer" fluid>
       <Row className="text-center m-3">
         <Col xs={{ span: 8, offset: 2 }}>
-          <h1>{title}</h1>
+          <h1 className="title">{title}</h1>
         </Col>
         <Col xs="12" className="d-lg-none">
           <Button variant="dark" className="w-100" onClick={handleShow}>
@@ -39,7 +39,7 @@ function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
         </Col>
         <Col lg="10">
           <Row>
-            {search.items.length ? search.items.map(itemsFunction) : <Col>Loading...</Col>}
+            {search.items!==undefined ? search.items.length>0 ? search.items.map(itemsFunction): <Col>No results! Try another query.</Col> : <Col>Loading...</Col>}
           </Row>
         </Col>
       </Row>

@@ -1,3 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 .avoid-footer{
+  min-height: 100vh;
   margin-bottom: 150px;
 }
+
+.navbar-brand, .logo {
+  font-family: 'Ubuntu';
+  font-weight: Bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+.navbar-brand, .logo, .title {
+  font-weight: Bold;
+  text-transform: uppercase;
+  color: white;
+}
+
+.title {
+  font-weight: Bold;
+  text-transform: uppercase;
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.body {
+  min-height: 100vh;
+  background-image: url("https://content.money.com/wp-content/uploads/2019/12/eat-fruits-vegetables-get-paid-998408416.jpg?quality=85");
+  background-size: 100vw auto;
+}
+

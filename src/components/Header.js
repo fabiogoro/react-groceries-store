@@ -4,6 +4,8 @@ import Container from 'react-bootstrap/Container'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge'
 import { useUserContext } from '../contexts/UserContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBasketShopping, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
   const queryParams = new URLSearchParams(window.location.search)
@@ -20,7 +22,9 @@ function Header() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Groceries store</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <FontAwesomeIcon icon={faBasketShopping} /> Groceries store
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <form
@@ -29,16 +33,20 @@ function Header() {
             onSubmit={submitSearch}
           >
             <input
-              className="form-control me-2 w-25"
+              className="form-control mx-4"
               aria-label="Search"
-              placeholder="search"
+              placeholder="Search for a product here"
               name="q"
               id="q"
               defaultValue={'' || queryParam}
               type="search"
             />{' '}
-            <button className="btn btn-outline-secondary" type="submit">
-              Search
+            <button
+              className="btn btn-secondary"
+              type="submit"
+              style={{ position: 'relative', left: -60 }}
+            >
+              <FontAwesomeIcon icon={faSearch} />
             </button>
           </form>
           <Nav className="me-auto justify-content-end">

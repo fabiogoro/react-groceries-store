@@ -50,7 +50,7 @@ function Product() {
       <Form onSubmit={form.formSubmit()} noValidate>
         <Card>
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">Product</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">Product</Card.Title>
             <Row>
               <Col sm="12" lg="6">
                 <Card>

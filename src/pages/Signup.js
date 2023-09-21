@@ -8,8 +8,6 @@ import TextInput from '../components/inputs/textInput'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
 import { useApiContext } from '../contexts/ApiContext'
 import { postSignUp } from '../api/UserApi'
 
@@ -38,7 +36,7 @@ function Signup() {
       <Form onSubmit={form.formSubmit()} noValidate>
         <Card>
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">Sign up</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">Sign up</Card.Title>
 
             <EmailInput
               changeHandler={form.changeHandler()}

@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 function TextInput({patternMessage, changeHandler, input, name, id, label, required, type, minlength, maxlength, pattern, className, defaultValue, step}) {
   useEffect(() => {
     if (defaultValue) input.value = defaultValue
-  }, [defaultValue])
+  }, [defaultValue, input])
 
   return (
     <FloatingLabel

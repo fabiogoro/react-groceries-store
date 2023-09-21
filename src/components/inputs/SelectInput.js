@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 function SelectInput({input, changeHandler, data, optionFunction, id, label, name, required, className, placeholder, defaultValue}) {
   useEffect(() => {
     if (defaultValue) input.value = defaultValue
-  }, [defaultValue])
+  }, [defaultValue, input])
 
   return (
     <FloatingLabel

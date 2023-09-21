@@ -31,7 +31,7 @@ function Products() {
     <Container className="mt-4 text-center avoid-footer">
       <Card>
         <Card.Body>
-          <Card.Title className="fw-bold mb-4">Products</Card.Title>
+          <Card.Title className="fw-bold mb-4 fs-2">Products</Card.Title>
           <Button href="/product" className="m-2">Add product</Button>
           <DataTable
             data={products?.results}

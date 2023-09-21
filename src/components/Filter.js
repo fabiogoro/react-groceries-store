@@ -11,7 +11,7 @@ function Filter({ clickHandler, fetchFunction, title, values }) {
       const results = await fetchFunction()
       setFilter(results)
     })()
-  }, [])
+  }, [fetchFunction])
 
   function listClick(e) {
     if (e.target.children.length) {

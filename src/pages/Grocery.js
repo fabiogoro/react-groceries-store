@@ -20,83 +20,104 @@ function Grocery() {
   const [grocery] = useFetch({ f: fetchGrocery, id })
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4 avoid-footer">
       <Row>
         <Col>
           {grocery ? (
             <Card>
-              <Row>
-                <Col>
-                  <Carousel variant="dark" className="h-100 text-center">
-                    {grocery.pictures?.map((p, i) => (
-                      <Carousel.Item className="h-100" key={i}>
-                        <Image
-                          className="h-100"
-                          fluid
-                          src={`${p.path}`}
-                          alt="First slide"
-                        />
-                      </Carousel.Item>
-                    ))}
-                  </Carousel>
-                </Col>
-                <Col>
+              <Card.Body>
+                <Card className="py-4">
+                  <Row>
+                    <Col>
+                      <Carousel variant="dark" className="h-100 text-center">
+                        {grocery.pictures?.map((p, i) => (
+                          <Carousel.Item className="h-100" key={i}>
+                            <Image
+                              className="h-100"
+                              fluid
+                              src={`${p.path}`}
+                              alt="First slide"
+                            />
+                          </Carousel.Item>
+                        ))}
+                      </Carousel>
+                    </Col>
+                    <Col>
+                      <Card.Body className="ms-4">
+                        <Card.Title className="fs-2">
+                          <strong>{grocery.title}</strong>
+                        </Card.Title>
+                        <Card.Title>Buy this product</Card.Title>
+                        <Card.Text>Each unity: ${parseInt(grocery.price).toFixed(2)}</Card.Text>
+                            
+                            {item ? (
+                              <>
+                                <Button
+                                  onClick={user.cart.removeCart(id)}
+                                  size="sm"
+                                  variant="dark"
+                                >
+                                  <FontAwesomeIcon icon={faMinus} />
+                                </Button>{' '}
+                                {item.quantity}{' '}
+                                <Button
+                                  onClick={user.cart.addCart(id)}
+                                  size="sm"
+                                  variant="dark"
+                                >
+                                  <FontAwesomeIcon icon={faPlus} />
+                                </Button>
+                              </>
+                            ) : (
+                              <Button onClick={user.cart.addCart(id)} variant="dark">
+                                <FontAwesomeIcon icon={faCartPlus} /> Add to cart
+                              </Button>
+                            )}
+                      </Card.Body>
+                    </Col>
+                  </Row>
+                </Card>
+                <Card className="mt-4">
                   <Card.Body>
                     <Card.Title>
-                      <strong>{grocery.title}</strong>
-                      <br />${parseInt(grocery.price).toFixed(2)}
+                      <strong>Categories: {grocery.category_name}</strong>
                     </Card.Title>
-                    <p>
-                      <strong>Categories: </strong>
-                      <span>{grocery.category_name}</span>
-                    </p>
-                    <p>
+                  </Card.Body>
+                </Card>
+                <Card className="mt-4">
+                  <Card.Body>
+                    <Card.Title>
                       <strong>Description:</strong>
-                      <br />
+                    </Card.Title>
+                    <Card.Text>
                       {grocery.description}
-                    </p>
-                    {grocery.calories &&
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+                {grocery.calories &&
                     grocery.carbohydrates &&
                     grocery.fats &&
                     grocery.proteins ? (
-                      <p>
-                        <strong>Nutrition facts (per 100g):</strong>
-                        <br />
-                        Calories: {grocery.calories} kcal
-                        <br />
-                        Carbohydrates: {grocery.carbohydrates} g
-                        <br />
-                        Proteins: {grocery.proteins} g
-                        <br />
-                        Fats: {grocery.fats} g
-                      </p>
+                      <Card className="mt-4">
+                        <Card.Body>
+                          <Card.Title>
+                            <strong>Nutrition facts (per 100g):</strong>
+                          </Card.Title>
+                          <Card.Text>
+                            <p>
+                              Calories: {grocery.calories} kcal
+                              <br />
+                              Carbohydrates: {grocery.carbohydrates} g
+                              <br />
+                              Proteins: {grocery.proteins} g
+                              <br />
+                              Fats: {grocery.fats} g
+                            </p>
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
                     ) : null}
-                    {item ? (
-                      <>
-                        <Button
-                          onClick={user.cart.removeCart(id)}
-                          size="sm"
-                          variant="dark"
-                        >
-                          <FontAwesomeIcon icon={faMinus} />
-                        </Button>{' '}
-                        {item.quantity}{' '}
-                        <Button
-                          onClick={user.cart.addCart(id)}
-                          size="sm"
-                          variant="dark"
-                        >
-                          <FontAwesomeIcon icon={faPlus} />
-                        </Button>
-                      </>
-                    ) : (
-                      <Button onClick={user.cart.addCart(id)} variant="dark">
-                        <FontAwesomeIcon icon={faCartPlus} /> Add to cart
-                      </Button>
-                    )}
-                  </Card.Body>
-                </Col>
-              </Row>
+              </Card.Body>
             </Card>
           ) : null}
         </Col>

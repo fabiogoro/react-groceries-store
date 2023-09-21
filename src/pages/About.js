@@ -11,7 +11,7 @@ function About() {
           <Card>
             <Card.Body className="text-center">
               <Card.Title>
-                <strong>About us</strong>
+                <strong className="fs-2">About us</strong>
               </Card.Title>
               <Card.Text className="p-4 m-4">
                 We are an online grocery store where you can find everything you

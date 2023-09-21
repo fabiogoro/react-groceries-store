@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 export const useSearch = (fetchFunction) => {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, ] = useSearchParams()
   const q = searchParams.get('q') || ''
   const sort_by = searchParams.get('sort_by') || 'title.asc'
   const categories = searchParams.get('categories') || ''
 
   const search = new Search(useState({
-    items: [],
     page: 1,
     sort_by: sort_by,
     categories: categories,
@@ -16,8 +15,10 @@ export const useSearch = (fetchFunction) => {
   }), fetchFunction)
 
   useEffect(() => {
-    search.newSearch()
-  }, [])
+    if(search.data.items===undefined){
+      search.newSearch()
+    }
+  })
 
 
   useEffect(() => {

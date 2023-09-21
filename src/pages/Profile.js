@@ -66,7 +66,7 @@ function Profile() {
       <Form onSubmit={form.formSubmit()} noValidate>
         <Card className="px-5">
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">My profile</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">My profile</Card.Title>
             <Row>
               <Card>
                 <Card.Body>

@@ -26,7 +26,7 @@ function Login() {
       <Form noValidate onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">Log in</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">Log in</Card.Title>
 
             <EmailInput
               changeHandler={form.changeHandler()}

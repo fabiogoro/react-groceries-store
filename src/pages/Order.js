@@ -33,10 +33,10 @@ function Order() {
         <Col>
           {order?(
             <Card className="mb-4">
-              <Card.Body>
+              <Card.Body className="mx-4">
                 {user.isAdmin?(
                   <>
-                    <Card.Title className="text-center fw-bold mb-4">
+                    <Card.Title className="text-center fw-bold mb-4 fs-2">
                       Receipt from {order.user_info?.name} for {(new Date(order.order_date)).toLocaleString()}
                     </Card.Title>
                     <Card className="mb-4">
@@ -56,7 +56,7 @@ function Order() {
                   </>
                 ):(
                   <>
-                    <Card.Title className="text-center fw-bold mb-4">
+                    <Card.Title className="text-center fw-bold mb-4 fs-2">
                       Your receipt for {(new Date(order.order_date)).toLocaleString()}
                     </Card.Title>
                     <Card className="mb-4">
