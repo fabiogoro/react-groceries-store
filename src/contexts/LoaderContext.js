@@ -1,22 +1,11 @@
-import { createContext, useContext, useState } from 'react'
-import { useUser } from '../hooks/UserHook'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
+import { createContext, useContext } from 'react'
 
-const LoaderContext = createContext(null);
+const LoaderContext = createContext(null)
 
 export const useLoaderContext = () => {
-  return useContext(LoaderContext);
-};
+  return useContext(LoaderContext)
+}
 
-export function LoaderProvider({children}){
-  return (
-    <LoaderContext.Provider
-      value={{
-      }}
-    >
-      {children}
-    </LoaderContext.Provider>
-
-  )
+export function LoaderProvider({ children }) {
+  return <LoaderContext.Provider value={{}}>{children}</LoaderContext.Provider>
 }

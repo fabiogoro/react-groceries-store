@@ -6,5 +6,5 @@ export const useAuth = (user) => {
 
   useEffect(() => {
     if(!user.isLoggedIn) navigate('/login')
-  }, [user.data])
+  }, [user.isLoggedIn, navigate])
 }

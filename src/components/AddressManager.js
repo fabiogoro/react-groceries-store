@@ -1,12 +1,9 @@
 import ListGroup from 'react-bootstrap/ListGroup'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
 import { useUserContext } from '../contexts/UserContext'
 import { useEffect, useState } from 'react'
 import ReadOnly from '../components/inputs/readOnly'
 import TextInput from '../components/inputs/textInput'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 function AddressManager({ form }) {
   const user = useUserContext()

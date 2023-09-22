@@ -56,7 +56,7 @@ export class Cart {
   }
 
   get totalPrice() {
-    return Cart.totalPrice(this.user.data?.cart)
+    return Cart.totalPrice(this.user.data?.cart).toFixed(2)
   }
 
   static totalPrice(cart) {

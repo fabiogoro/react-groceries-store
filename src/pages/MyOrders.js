@@ -29,7 +29,7 @@ function MyOrders() {
     <Container className="mt-4 text-center avoid-footer">
       <Card>
         <Card.Body>
-          <Card.Title className="fw-bold mb-4">My orders</Card.Title>
+          <Card.Title className="fw-bold mb-4 fs-2">My orders</Card.Title>
           <DataTable
             data={orders?.results}
             headers={[

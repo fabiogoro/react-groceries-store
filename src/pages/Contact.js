@@ -11,7 +11,7 @@ function Contact() {
           <Card>
             <Card.Body className="text-center">
               <Card.Title>
-                <strong>Contact us</strong>
+                <strong className="fs-2">Contact us</strong>
               </Card.Title>
               <Card.Text className="p-4 m-4">
                 In any case, you can reach us through the following channels:

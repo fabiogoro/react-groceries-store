@@ -2,9 +2,8 @@ import Card from 'react-bootstrap/Card'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useSearchParams } from 'react-router-dom'
 import { useEffect } from "react"
-import { useSearchParams } from 'react-router-dom'
 import Alert from 'react-bootstrap/Alert'
 import { useNavigate } from 'react-router-dom'
 import ShortList from '../components/ShortList'
@@ -26,7 +25,7 @@ function Order() {
   }, [order, navigate])
 
   return (
-    <Container className="mt-4">
+    <Container className="mt-4 avoid-footer">
       {message !== '' ? (
         <Alert variant="success">{message}</Alert>
       ) : null}
@@ -34,10 +33,10 @@ function Order() {
         <Col>
           {order?(
             <Card className="mb-4">
-              <Card.Body>
+              <Card.Body className="mx-4">
                 {user.isAdmin?(
                   <>
-                    <Card.Title className="text-center fw-bold mb-4">
+                    <Card.Title className="text-center fw-bold mb-4 fs-2">
                       Receipt from {order.user_info?.name} for {(new Date(order.order_date)).toLocaleString()}
                     </Card.Title>
                     <Card className="mb-4">
@@ -57,7 +56,7 @@ function Order() {
                   </>
                 ):(
                   <>
-                    <Card.Title className="text-center fw-bold mb-4">
+                    <Card.Title className="text-center fw-bold mb-4 fs-2">
                       Your receipt for {(new Date(order.order_date)).toLocaleString()}
                     </Card.Title>
                     <Card className="mb-4">
@@ -82,7 +81,7 @@ function Order() {
                     </Card.Title>
                     <Card.Text className="text-center">
                       Total items: {Cart.totalItems(order?.groceries)}<br/>
-                      Total price: {Cart.totalPrice(order?.groceries)}
+                      Total price: ${Cart.totalPrice(order?.groceries).toFixed(2)}
                     </Card.Text>
                     <ShortList items={order?.groceries}></ShortList>
 

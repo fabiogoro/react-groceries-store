@@ -6,8 +6,6 @@ import ReadOnly from '../components/inputs/readOnly'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
 import Alert from 'react-bootstrap/Alert'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import { useAuth } from '../hooks/AuthHook'
@@ -40,14 +38,14 @@ function Checkout() {
   })
 
   return (
-    <Container className="mt-4 px-5 text-center avoid-footer">
+    <Container className="mt-4 text-center avoid-footer">
       {form.data.error !== '' ? (
         <Alert variant="danger">{form.data.error}</Alert>
       ) : null}
       <Form onSubmit={form.formSubmit()} noValidate>
         <Card>
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">Order review</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">Order review</Card.Title>
             <Row>
               <Col lg="7">
                 <Card>
@@ -76,7 +74,7 @@ function Checkout() {
                     </div>
 
                     <div className="mb-4">
-                      Total price: ${user.cart.totalPrice.toFixed(2)}
+                      Total price: ${user.cart.totalPrice}
                     </div>
                     <ShortList items={user.cart}></ShortList>
                     <Button variant="dark" type="submit" className="mt-4">

@@ -7,8 +7,6 @@ import { useSearchParams } from 'react-router-dom'
 import PasswordInput from '../components/inputs/passwordInput'
 import Input from '../util/form/input'
 import { useForm } from '../hooks/FormHook'
-import Modal from 'react-bootstrap/Modal'
-import Spinner from 'react-bootstrap/Spinner'
 import { useApiContext } from '../contexts/ApiContext'
 import { postNewPassword } from '../api/UserApi'
 
@@ -41,7 +39,7 @@ function NewPassword({ setUser }) {
       <Form onSubmit={form.formSubmit()}>
         <Card>
           <Card.Body>
-            <Card.Title className="fw-bold mb-4">Reset password</Card.Title>
+            <Card.Title className="fw-bold mb-4 fs-2">Reset password</Card.Title>
 
             <PasswordInput
               changeHandler={form.changeHandler()}
