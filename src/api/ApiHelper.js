@@ -1,4 +1,4 @@
-const base = 'http://localhost:3000/'
+const base = process.env.REACT_APP_BACKEND_URL
 
 export class ApiHelper {
   constructor(setIsLoading) {
