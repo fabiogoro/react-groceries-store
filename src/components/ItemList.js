@@ -1,63 +1,20 @@
-import { useState } from 'react'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import Filter from '../components/Filter'
-import SortSelector from '../components/SortSelector'
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import { useSearch } from '../hooks/SearchHook'
-
-function ItemList({ title, fetchFunction, fetchCategories, itemsFunction }) {
-  const [show, setShow] = useState(false)
-
-  const [search] = useSearch(fetchFunction)
-
-  const handleShow = () => setShow(true)
-
-  return (
-    <Container className="min-vh-100 avoid-footer" fluid>
-      <Row className="text-center m-3">
-        <Col xs={{ span: 8, offset: 2 }}>
-          <h1 className="title">{title}</h1>
-        </Col>
-        <Col xs="12" className="d-lg-none">
-          <Button variant="dark" className="w-100" onClick={handleShow}>
-            Filters
-          </Button>
-        </Col>
-        <SortSelector onChange={search.changeSorting} value={search.data.sort_by}></SortSelector>
-      </Row>
-      <Row>
-        <Col lg="2" className="d-none d-lg-block">
-          <Filter
-            clickHandler={search.changeFilters}
-            fetchFunction={fetchCategories}
-            values={search.data.categories}
-            title="Categories"
-          ></Filter>
-        </Col>
-        <Col lg="10">
-          <Row>
-            {search.items!==undefined ? search.items.length>0 ? search.items.map(itemsFunction): <Col>No results! Try another query.</Col> : <Col>Loading...</Col>}
-          </Row>
-        </Col>
-      </Row>
-      <Offcanvas show={show}>
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Filters</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <Filter
-            clickHandler={search.changeFilters}
-            fetchFunction={fetchCategories}
-            values={search.data.categories}
-            title="Categories"
-          ></Filter>
-        </Offcanvas.Body>
-      </Offcanvas>
-    </Container>
-  )
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var jsx_runtime_1 = require("react/jsx-runtime");
+var react_1 = require("react");
+var Container_1 = require("react-bootstrap/Container");
+var Row_1 = require("react-bootstrap/Row");
+var Col_1 = require("react-bootstrap/Col");
+var Button_1 = require("react-bootstrap/Button");
+var Filter_1 = require("../components/Filter");
+var SortSelector_1 = require("../components/SortSelector");
+var Offcanvas_1 = require("react-bootstrap/Offcanvas");
+var SearchHook_1 = require("../hooks/SearchHook");
+function ItemList(_a) {
+    var title = _a.title, fetchFunction = _a.fetchFunction, fetchCategories = _a.fetchCategories, itemsFunction = _a.itemsFunction;
+    var _b = (0, react_1.useState)(false), show = _b[0], setShow = _b[1];
+    var search = (0, SearchHook_1.useSearch)(fetchFunction)[0];
+    var handleShow = function () { return setShow(true); };
+    return ((0, jsx_runtime_1.jsxs)(Container_1.default, { className: "min-vh-100 avoid-footer", fluid: true, children: [(0, jsx_runtime_1.jsxs)(Row_1.default, { className: "text-center m-3", children: [(0, jsx_runtime_1.jsx)(Col_1.default, { xs: { span: 8, offset: 2 }, children: (0, jsx_runtime_1.jsx)("h1", { className: "title", children: title }) }), (0, jsx_runtime_1.jsx)(Col_1.default, { xs: "12", className: "d-lg-none", children: (0, jsx_runtime_1.jsx)(Button_1.default, { variant: "dark", className: "w-100", onClick: handleShow, children: "Filters" }) }), (0, jsx_runtime_1.jsx)(SortSelector_1.default, { onChange: search.changeSorting, value: search.data.sort_by })] }), (0, jsx_runtime_1.jsxs)(Row_1.default, { children: [(0, jsx_runtime_1.jsx)(Col_1.default, { lg: "2", className: "d-none d-lg-block", children: (0, jsx_runtime_1.jsx)(Filter_1.default, { clickHandler: search.changeFilters, fetchFunction: fetchCategories, values: search.data.categories, title: "Categories" }) }), (0, jsx_runtime_1.jsx)(Col_1.default, { lg: "10", children: (0, jsx_runtime_1.jsx)(Row_1.default, { children: search.items !== undefined ? search.items.length > 0 ? search.items.map(itemsFunction) : (0, jsx_runtime_1.jsx)(Col_1.default, { children: "No results! Try another query." }) : (0, jsx_runtime_1.jsx)(Col_1.default, { children: "Loading..." }) }) })] }), (0, jsx_runtime_1.jsxs)(Offcanvas_1.default, { show: show, children: [(0, jsx_runtime_1.jsx)(Offcanvas_1.default.Header, { closeButton: true, children: (0, jsx_runtime_1.jsx)(Offcanvas_1.default.Title, { children: "Filters" }) }), (0, jsx_runtime_1.jsx)(Offcanvas_1.default.Body, { children: (0, jsx_runtime_1.jsx)(Filter_1.default, { clickHandler: search.changeFilters, fetchFunction: fetchCategories, values: search.data.categories, title: "Categories" }) })] })] }));
 }
-
-export default ItemList
+exports.default = ItemList;

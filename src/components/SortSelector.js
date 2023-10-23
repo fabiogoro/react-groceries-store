@@ -1,18 +1,10 @@
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-
-function SortSelector({onChange, value}) {
-  return (
-    <Col xs="12" lg="2">
-      <label htmlFor="sort" className="text-light">Sort by:</label>
-      <Form.Select value={value} onChange={onChange} id="sort" aria-label="Sort by">
-        <option value="title.asc">Alphabetical (A-Z)</option>
-        <option value="title.desc">Alphabetical (Z-A)</option>
-        <option value="price.asc">Price (Low-High)</option>
-        <option value="price.desc">Price (High-Low)</option>
-      </Form.Select>
-    </Col>
-  );
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var jsx_runtime_1 = require("react/jsx-runtime");
+var Col_1 = require("react-bootstrap/Col");
+var Form_1 = require("react-bootstrap/Form");
+function SortSelector(_a) {
+    var onChange = _a.onChange, value = _a.value;
+    return ((0, jsx_runtime_1.jsxs)(Col_1.default, { xs: "12", lg: "2", children: [(0, jsx_runtime_1.jsx)("label", { htmlFor: "sort", className: "text-light", children: "Sort by:" }), (0, jsx_runtime_1.jsxs)(Form_1.default.Select, { value: value, onChange: onChange, id: "sort", "aria-label": "Sort by", children: [(0, jsx_runtime_1.jsx)("option", { value: "title.asc", children: "Alphabetical (A-Z)" }), (0, jsx_runtime_1.jsx)("option", { value: "title.desc", children: "Alphabetical (Z-A)" }), (0, jsx_runtime_1.jsx)("option", { value: "price.asc", children: "Price (Low-High)" }), (0, jsx_runtime_1.jsx)("option", { value: "price.desc", children: "Price (High-Low)" })] })] }));
 }
-
-export default SortSelector;
+exports.default = SortSelector;
